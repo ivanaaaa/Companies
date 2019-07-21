@@ -64,6 +64,7 @@
 
 
     <ImageView
+        android:id="@+id/info_image_id"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_alignParentTop="true"
