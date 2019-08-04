@@ -32,7 +32,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v;
-        v = LayoutInflater.from(mContext).inflate(R.layout.item_services, viewGroup, false);
+        v = LayoutInflater.from(mContext).inflate(R.layout.companies_item, viewGroup, false);
         final MyViewHolder vHolder = new MyViewHolder(v);
 
         //initialization Dialog
@@ -40,7 +40,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         myDialog.setContentView(R.layout.info_companies);
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        vHolder.item_sevices.setOnClickListener(new View.OnClickListener() {
+        vHolder.companies_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TextView info_name_tv = (TextView) myDialog.findViewById(R.id.info_name_id);
@@ -74,7 +74,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private LinearLayout item_sevices;
+        private LinearLayout companies_item;
         private TextView tv_name;
         private TextView tv_address;
         private TextView tv_phone;
@@ -84,7 +84,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            item_sevices = (LinearLayout) itemView.findViewById(R.id.services_item_id);
+           companies_item = (LinearLayout) itemView.findViewById(R.id.companies_item);
             tv_name = (TextView) itemView.findViewById(R.id.name_company);
             tv_address = (TextView) itemView.findViewById(R.id.address_company);
             tv_phone = (TextView) itemView.findViewById(R.id.phone_company);
