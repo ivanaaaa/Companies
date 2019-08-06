@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
        // appBarLayout = (AppBarLayout) findViewById(R.id.appbarid);
 setSupportActionBar(appBarLayout);
         //tab
-        tabLayout= (TabLayout) findViewById(R.id.tablayout_id);
+        tabLayout= (TabLayout) findViewById(R.id.appbarid);
         viewPager = (ViewPager) findViewById(R.id.viewpager_id);
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         //ovde da dodadam fragmenti treba
