@@ -28,7 +28,7 @@ import java.text.DecimalFormat;
 
 import static android.text.TextUtils.*;
 
-public class Input extends AppCompatActivity {
+public class Input extends AppCompatActivity implements View.OnClickListener{
     public ImageView input;
     Toolbar appbarid;
     public EditText name_company;
@@ -38,29 +38,10 @@ public class Input extends AppCompatActivity {
     public EditText email, phone, web;
     private CheckBox services_check, fun_check, industry_check, education_check;
     Button save;
-    //  private Firebase mRootRef;
-    // private DatabaseReference mdb;
 
-    FirebaseDatabase database;
+//    FirebaseDatabase database;
     DatabaseReference ref;
     Companies Company;
-
-//    public String Name,Address,Email,Web;
-//    public DecimalFormat Longitude,Latitude;
-//    public Integer Phone;
-//
-//    public Input() {
-//    }
-//
-//    public Input(String name, String address, String email, Integer phone, String web, DecimalFormat longitude, DecimalFormat latitude) {
-//        Name = name;
-//        Address = address;
-//        Email = email;
-//        Phone = phone;
-//        Web = web;
-//        Longitude = longitude;
-//        Latitude = latitude;
-//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +84,9 @@ public class Input extends AppCompatActivity {
         company_id = ref.push().getKey();
         Company = new Companies(company_id,name,address,lat,lon,mail,tel,web_site,services,fun,industry,education);
         ref.child(company_id).setValue(Company);
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
 
     }
 
@@ -181,10 +165,9 @@ public class Input extends AppCompatActivity {
 //
 //    }
 
-    public void openIntent() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
+//    public void openIntent() {
+//
+//    }
 //    save.setOnClickListener(new View.OnClickListener() {
 //        @Override
 //        public void onClick(View v) {
