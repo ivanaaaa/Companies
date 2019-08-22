@@ -21,14 +21,15 @@ public class FragmentList extends RecyclerView.Adapter<FragmentList.ViewHolder> 
     private Context context;
 
     public interface OnItemClickListener {
-        void onItemClick (int place);
+        void onItemClick(int place);
     }
 
     public void OnItemClickListener(OnItemClickListener listener) {
 
         clickListener = listener;
     }
-//set
+
+    //set
     public FragmentList(Context context, List<Companies> previewCompanies) {
         this.context = context;
         this.previewCompanies = previewCompanies;
@@ -38,8 +39,8 @@ public class FragmentList extends RecyclerView.Adapter<FragmentList.ViewHolder> 
 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.list_layout, viewGroup, false);
-        return new FragmentList().ViewHolder(view);
+        View view = LayoutInflater.from(context).inflate(R.layout.info_companies, viewGroup, false);
+        return new FragmentList.ViewHolder(view);
     }
 
     @Override
@@ -70,11 +71,9 @@ public class FragmentList extends RecyclerView.Adapter<FragmentList.ViewHolder> 
 //            companyAddress = itemView.findViewById(R.id.info_address_id);
             companyTelephone = itemView.findViewById(R.id.info_phone_id);
 
-            itemView.setOnClickListener(new View.OnClickListener()
-            {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v)
-                {
+                public void onClick(View v) {
                     if (clickListener != null) {
                         int position = getAdapterPosition();
 
