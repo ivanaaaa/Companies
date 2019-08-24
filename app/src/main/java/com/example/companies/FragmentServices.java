@@ -25,6 +25,7 @@ public class FragmentServices extends Fragment {
     View v;
     private RecyclerView myrecyclerview;
     private List<Companies> ServicesCompanies;
+    private FragmentList fragmentList;
 
     public FragmentServices() {
     }
@@ -43,25 +44,25 @@ public class FragmentServices extends Fragment {
     }
 
     private void getCompaniesList() {
-        final DatabaseReference database_reference = FirebaseDatabase.getInstance().getReference(Companies);
+        final DatabaseReference database_reference = FirebaseDatabase.getInstance().getReference("Companies");
         database_reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ServicesCompanies.clear();
 
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Companies company;
                     company = snapshot.getValue(Companies.class);
 
-                    if (company.getCheck_services()==true){
+                    if (company.getCheck_services() == true) {
                         ServicesCompanies.add(company);
                     }
 
                 }
 
-                companyAdapter = new CompanyList(getContext(),ServicesCompanies);
-                recyclerView.setAdapter(companyAdapter);
-                companyAdapter.setOnItemClickListener(ServicesFragment.this);
+                fragmentList = new FragmentList(getContext(), ServicesCompanies);
+                myrecyclerview.setAdapter(fragmentList);
+                fragmentList.OnItemClickListener((FragmentList.OnItemClickListener) FragmentServices.this);
 
             }
 
@@ -69,7 +70,7 @@ public class FragmentServices extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        })
+        });
     }
 
 //example of list
@@ -86,4 +87,6 @@ public class FragmentServices extends Fragment {
 //        lstServices.add(new Services("BuyCar","ulica7","078965426","https//Buycar.com",R.drawable.img1));
 //        lstServices.add(new Services("Findsmth","ulica8","078965957","https//Findsmth.com",R.drawable.img1));
 //    }
+
+
 }
