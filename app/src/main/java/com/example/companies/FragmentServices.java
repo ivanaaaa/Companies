@@ -34,7 +34,7 @@ public class FragmentServices extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.services_fragment, container, false);
-        myrecyclerview = (RecyclerView) v.findViewById(R.id.services_recyclerview);
+        myrecyclerview = v.findViewById(R.id.services_recyclerview);
 //        RecyclerViewAdapter recyclerAdapter= new RecyclerViewAdapter(getContext(),lstServices);
         myrecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
 //        myrecyclerview.setAdapter(recyclerAdapter);
