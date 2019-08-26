@@ -34,7 +34,7 @@ public class FragmentFun extends Fragment {
         v = inflater.inflate(R.layout.fun_fragment, container, false);
         myrecyclerview = (RecyclerView) v.findViewById(R.id.fun_recyclerview);
 //        RecyclerViewAdapter recyclerAdapter= new RecyclerViewAdapter(getContext(),lstFun);
-        myrecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+        myrecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
 //        myrecyclerview.setAdapter(recyclerAdapter);
 
         FunCompanies = new ArrayList<>();

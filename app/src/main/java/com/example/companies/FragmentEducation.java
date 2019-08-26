@@ -34,7 +34,7 @@ public class FragmentEducation extends Fragment {
         v = inflater.inflate(R.layout.education_fragment, container, false);
         myrecyclerview = (RecyclerView) v.findViewById(R.id.education_recyclerview);
 //        RecyclerViewAdapter recyclerAdapter= new RecyclerViewAdapter(getContext(),lstEducation);
-        myrecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+        myrecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
 //        myrecyclerview.setAdapter(recyclerAdapter);
 
         EducationCompanies = new ArrayList<>();
