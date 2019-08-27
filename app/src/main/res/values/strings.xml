@@ -4,5 +4,6 @@
     <string name="company_name">Company Name</string>
     <string name="settings">Settings</string>
     <string name="back">Back</string>
+    <string name="save">Save</string>
 
 </resources>
