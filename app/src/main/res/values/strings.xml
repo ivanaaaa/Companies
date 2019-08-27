@@ -17,5 +17,7 @@
     <string name="telephone">Telephone</string>
     <string name="web_site">Web site</string>
     <string name="category">Category</string>
+    <string name="mobile_call">Mobile Call</string>
+    <string name="write_message">Write Message</string>
 
 </resources>
