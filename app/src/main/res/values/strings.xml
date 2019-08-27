@@ -5,5 +5,17 @@
     <string name="settings">Settings</string>
     <string name="back">Back</string>
     <string name="save">Save</string>
+    <string name="services">Services</string>
+    <string name="fun">Fun</string>
+    <string name="industry">Industry</string>
+    <string name="education">Education</string>
+    <string name="name">Name</string>
+    <string name="address">Address</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="e_mail_address">E-mail address</string>
+    <string name="telephone">Telephone</string>
+    <string name="web_site">Web site</string>
+    <string name="category">Category</string>
 
 </resources>
