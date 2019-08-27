@@ -1,56 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
+    android:id="@+id/companies_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp"
     android:layout_marginTop="10dp"
-    android:id="@+id/companies_item"
-    >
+    android:orientation="horizontal"
+    android:padding="5dp">
 
     <ImageView
+        android:id="@+id/img_services"
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:src="@mipmap/ic_launcher_round"
-        android:id="@+id/img_services"/>
+        android:src="@mipmap/ic_launcher_round" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginLeft="16dp">
+        android:layout_marginStart="16dp"
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold|italic"
-            android:text="Company Name"
             android:id="@+id/name_company"
-            android:textColor="#ffff"/>
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Company Address"
+            android:text="@string/company_name"
+            android:textColor="#ffff"
+            android:textStyle="bold|italic" />
+
+        <TextView
             android:id="@+id/address_company"
-            android:textColor="#ffff"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/address"
+            android:textColor="#ffff"
+            android:textStyle="bold" />
 
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Phone number"
             android:id="@+id/phone_company"
-            android:textColor="#ffff"/>
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Company Web Address"
+            android:text="@string/telephone"
+            android:textColor="#ffff" />
+
+        <TextView
             android:id="@+id/web_address_company"
-            android:textColor="#ffff"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/web_site"
+            android:textColor="#ffff"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
