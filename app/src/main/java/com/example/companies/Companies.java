@@ -11,10 +11,9 @@ public class Companies extends Application {
     private String Company_id;
     private String Name;
     private String Address;
-    private String Latitude;
-    private String Longitude;
+    public String Latitude;
+    public String Longitude;
     private String Email;
-    private String Category;
     private String Telephone;
     private String Web_site;
     private boolean check_services;
@@ -25,14 +24,13 @@ public class Companies extends Application {
     public Companies(String company_id, String name, String address, String lat, String lon, String mail, String tel, String web_site, boolean services, boolean fun, boolean industry, boolean education) {
     }
 
-    public Companies(String company_id, String name, String address, String latitude, String longitude, String email, String category, String telephone, String web_site, Boolean check_services, Boolean check_fun, Boolean check_industry, Boolean check_education) {
+    public Companies(String company_id, String name, String address, String latitude, String longitude, String email, String telephone, String web_site, Boolean check_services, Boolean check_fun, Boolean check_industry, Boolean check_education) {
         Company_id = company_id;
         Name = name;
         Address = address;
         Latitude = latitude;
         Longitude = longitude;
         Email = email;
-        Category = category;
         Telephone = telephone;
         Web_site = web_site;
         this.check_services = check_services;
@@ -87,14 +85,6 @@ public class Companies extends Application {
 
     public void setEmail(String email) {
         Email = email;
-    }
-
-    public String getCategory() {
-        return Category;
-    }
-
-    public void setCategory(String category) {
-        Category = category;
     }
 
     public String getTelephone() {
