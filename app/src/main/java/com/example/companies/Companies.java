@@ -21,6 +21,9 @@ public class Companies extends Application {
     private boolean check_industry;
     private boolean check_education;
 
+    public Companies() {
+    }
+
     public Companies(String company_id, String name, String address, String latitude, String longitude, String email, String telephone, String web_site, boolean check_services, boolean check_fun, boolean check_industry, boolean check_education) {
         Company_id = company_id;
         Name = name;
