@@ -28,7 +28,7 @@ import java.text.DecimalFormat;
 
 import static android.text.TextUtils.*;
 
-public class Input extends AppCompatActivity implements View.OnClickListener{
+public class Input extends AppCompatActivity implements View.OnClickListener {
     public ImageView input;
     Toolbar appbarid;
     public EditText name_company;
@@ -39,9 +39,9 @@ public class Input extends AppCompatActivity implements View.OnClickListener{
     private CheckBox services_check, fun_check, industry_check, education_check;
     Button save;
 
-//    FirebaseDatabase database;
+    //    FirebaseDatabase database;
     DatabaseReference ref;
-    Companies Company;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,9 @@ public class Input extends AppCompatActivity implements View.OnClickListener{
         //Toast.makeText(Input.this,"uspesno",Toast.LENGTH_LONG).show();
 
         FirebaseApp.initializeApp(this);
+
+        appbarid = findViewById(R.id.appbarid);
+        setSupportActionBar(appbarid);
         name_company = (EditText) findViewById(R.id.name_company);
         address_company = (EditText) findViewById(R.id.address_company);
         latitude = (EditText) findViewById(R.id.latitude);
@@ -78,11 +81,11 @@ public class Input extends AppCompatActivity implements View.OnClickListener{
         boolean fun = (boolean) fun_check.isChecked();
         boolean industry = (boolean) industry_check.isChecked();
         boolean education = (boolean) education_check.isChecked();
-
+        Companies Company;
         String company_id;
-        ref=FirebaseDatabase.getInstance().getReference("Companies");
+        ref = FirebaseDatabase.getInstance().getReference("Companies");
         company_id = ref.push().getKey();
-        Company = new Companies(company_id,name,address,lat,lon,mail,tel,web_site,services,fun,industry,education);
+        Company = new Companies(company_id, name, address, lat, lon, mail, tel, web_site, services, fun, industry, education);
         ref.child(company_id).setValue(Company);
 
         Intent intent = new Intent(this, MainActivity.class);
