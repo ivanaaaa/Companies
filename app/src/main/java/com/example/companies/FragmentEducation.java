@@ -1,5 +1,6 @@
 package com.example.companies;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,12 +20,17 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentEducation extends Fragment {
+public class FragmentEducation extends Fragment implements FragmentList.OnItemClickListener {
 
+    public static final String Company_name = "Name";
+    public static final String Company_address = "Address";
+    public static final String Company_email = "Email";
+    public static final String Company_phone = "Phone";
+    public static final String Company_web = "Web site";
 
     View v;
     private RecyclerView myrecyclerview;
-    private List<Companies> EducationCompanies;
+    private List<Companies> educationCompanies;
     private FragmentList fragmentList;
 
     public FragmentEducation() {
@@ -37,7 +43,7 @@ public class FragmentEducation extends Fragment {
         myrecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
 //        myrecyclerview.setAdapter(recyclerAdapter);
 
-        EducationCompanies = new ArrayList<>();
+        educationCompanies = new ArrayList<>();
         getCompaniesList();
         return v;
     }
@@ -47,19 +53,19 @@ public class FragmentEducation extends Fragment {
         database_reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                EducationCompanies.clear();
+                educationCompanies.clear();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Companies company;
                     company = snapshot.getValue(Companies.class);
 
                     if (company.isCheck_education()) {
-                        EducationCompanies.add(company);
+                        educationCompanies.add(company);
                     }
 
                 }
 
-                fragmentList = new FragmentList(getContext(), EducationCompanies);
+                fragmentList = new FragmentList(getContext(), educationCompanies);
                 myrecyclerview.setAdapter(fragmentList);
                 fragmentList.OnItemClickListener((FragmentList.OnItemClickListener) FragmentEducation.this);
 
@@ -85,4 +91,22 @@ public class FragmentEducation extends Fragment {
 //        lstEducation.add(new Services("Jane Sandanski","Stip","078965426","https//janesandanski.com",R.drawable.img1));
 //        lstEducation.add(new Services("OU Nikola Karev","Kocani","078965957","https//ounk.com",R.drawable.img1));
 //    }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent intent;
+
+        intent = new Intent(getActivity(),InfoActivity.class);
+
+        Companies clickedItem = educationCompanies.get(position);
+
+        intent.putExtra(Company_name,clickedItem.getName());
+        intent.putExtra(Company_address,clickedItem.getAddress());
+        intent.putExtra(Company_email,clickedItem.getEmail());
+        intent.putExtra(Company_phone,clickedItem.getTelephone());
+        intent.putExtra(Company_web,clickedItem.getWeb_site());
+
+        startActivity(intent);
+    }
+
 }
