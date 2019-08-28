@@ -1,5 +1,6 @@
 package com.example.companies;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,11 +20,16 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentIndustry extends Fragment {
+public class FragmentIndustry extends Fragment implements FragmentList.OnItemClickListener{
+    public static final String Company_name = "Name";
+    public static final String Company_address = "Address";
+    public static final String Company_email = "Email";
+    public static final String Company_phone = "Phone";
+    public static final String Company_web = "Web site";
 
     View v;
     private RecyclerView myrecyclerview;
-    private List<Companies> IndustryCompanies;
+    private List<Companies> industryCompanies;
     private FragmentList fragmentList;
 
     public FragmentIndustry() {
@@ -39,7 +45,7 @@ public class FragmentIndustry extends Fragment {
         myrecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
 //        myrecyclerview.setAdapter(recyclerAdapter);
 
-        IndustryCompanies = new ArrayList<>();
+        industryCompanies = new ArrayList<>();
         getCompaniesList();
         return v;
     }
@@ -50,19 +56,19 @@ public class FragmentIndustry extends Fragment {
         database_reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                IndustryCompanies.clear();
+                industryCompanies.clear();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Companies company;
                     company = snapshot.getValue(Companies.class);
 
                     if (company.isCheck_industry()) {
-                        IndustryCompanies.add(company);
+                        industryCompanies.add(company);
                     }
 
                 }
 
-                fragmentList = new FragmentList(getContext(), IndustryCompanies);
+                fragmentList = new FragmentList(getContext(), industryCompanies);
                 myrecyclerview.setAdapter(fragmentList);
                 fragmentList.OnItemClickListener((FragmentList.OnItemClickListener) FragmentIndustry.this);
 
@@ -88,4 +94,21 @@ public class FragmentIndustry extends Fragment {
 //        lstIndustry.add(new Services("BuyCar","ulica7","078965426","https//Buycar.com",R.drawable.img1));
 //        lstIndustry.add(new Services("Findsmth","ulica8","078965957","https//Findsmth.com",R.drawable.img1));
 //    }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent intent;
+
+        intent = new Intent(getActivity(),InfoActivity.class);
+
+        Companies clickedItem = industryCompanies.get(position);
+
+        intent.putExtra(Company_name,clickedItem.getName());
+        intent.putExtra(Company_address,clickedItem.getAddress());
+        intent.putExtra(Company_email,clickedItem.getEmail());
+        intent.putExtra(Company_phone,clickedItem.getTelephone());
+        intent.putExtra(Company_web,clickedItem.getWeb_site());
+
+        startActivity(intent);
+    }
 }
