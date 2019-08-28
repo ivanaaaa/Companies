@@ -75,6 +75,49 @@ public class Input extends AppCompatActivity implements View.OnClickListener {
         findViewById(R.id.btnInsert).setOnClickListener(this);
     }
 
+    public boolean validator (String name, String address, String lat, String lon, String mail, String tel,String web_site){
+        if (name.isEmpty()) {
+            name_company.setError("Enter Name");
+            name_company.requestFocus();
+            return true;
+        }
+        if (address.isEmpty()) {
+            address_company.setError("Enter address");
+            address_company.requestFocus();
+            return true;
+
+        }
+
+        if (lat.isEmpty()) {
+            latitude.setError("Enter latitude");
+            latitude.requestFocus();
+            return true;
+
+        }
+
+        if (lon.isEmpty()) {
+            longitude.setError("Enter longitude");
+            longitude.requestFocus();
+            return true;
+        }
+
+        if (mail.isEmpty()) {
+            email.setError("Enter mail");
+            email.requestFocus();
+            return true;
+        }
+        if (tel.isEmpty()) {
+            phone.setError("Enter phone");
+            phone.requestFocus();
+            return true;
+        }
+        if (web_site.isEmpty()) {
+            web.setError("Enter web site");
+            web.requestFocus();
+            return true;
+        }
+        return false;
+    }
     public void onClick(View v) {
 
         String name = (String) name_company.getText().toString();
@@ -88,16 +131,22 @@ public class Input extends AppCompatActivity implements View.OnClickListener {
         boolean fun = (boolean) fun_check.isChecked();
         boolean industry = (boolean) industry_check.isChecked();
         boolean education = (boolean) education_check.isChecked();
-        Companies Company;
-        String company_id;
-        ref = FirebaseDatabase.getInstance().getReference("Companies");
-        company_id = ref.push().getKey();
-        Company = new Companies(company_id, name, address, lat, lon, mail, tel, web_site, services, fun, industry, education);
-        ref.child(company_id).setValue(Company);
+        if (!validator(name, address, lat, lon, mail, tel, web_site))
+        {
+            Companies Company;
+            String company_id;
+            ref = FirebaseDatabase.getInstance().getReference("Companies");
+            company_id = ref.push().getKey();
+            Company = new Companies(company_id, name, address, lat, lon, mail, tel, web_site, services, fun, industry, education);
+            ref.child(1).setValue(Company);
 
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        Toast.makeText(this, "inserted", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            Toast.makeText(this, "inserted", Toast.LENGTH_LONG).show();
+        }
+     else
+            Toast.makeText(this, "error", Toast.LENGTH_LONG).show();
+
     }
 
 //        input = (ImageView) findViewById(R.id.input);
