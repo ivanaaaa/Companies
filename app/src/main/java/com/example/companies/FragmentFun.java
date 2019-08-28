@@ -53,7 +53,7 @@ public class FragmentFun extends Fragment {
                     Companies company;
                     company = snapshot.getValue(Companies.class);
 
-                    if (company.getCheck_fun() == true) {
+                    if (company.isCheck_fun()) {
                         FunCompanies.add(company);
                     }
 

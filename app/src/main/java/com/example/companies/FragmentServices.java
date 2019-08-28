@@ -54,7 +54,7 @@ public class FragmentServices extends Fragment {
                     Companies company;
                     company = snapshot.getValue(Companies.class);
 
-                    if (company.getCheck_services() == true) {
+                    if (company.isCheck_services()){
                         ServicesCompanies.add(company);
                     }
 

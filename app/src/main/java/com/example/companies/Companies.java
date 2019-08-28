@@ -21,10 +21,7 @@ public class Companies extends Application {
     private boolean check_industry;
     private boolean check_education;
 
-    public Companies(String company_id, String name, String address, String lat, String lon, String mail, String tel, String web_site, boolean services, boolean fun, boolean industry, boolean education) {
-    }
-
-    public Companies(String company_id, String name, String address, String latitude, String longitude, String email, String telephone, String web_site, Boolean check_services, Boolean check_fun, Boolean check_industry, Boolean check_education) {
+    public Companies(String company_id, String name, String address, String latitude, String longitude, String email, String telephone, String web_site, boolean check_services, boolean check_fun, boolean check_industry, boolean check_education) {
         Company_id = company_id;
         Name = name;
         Address = address;
@@ -103,35 +100,35 @@ public class Companies extends Application {
         Web_site = web_site;
     }
 
-    public Boolean getCheck_services() {
+    public boolean isCheck_services() {
         return check_services;
     }
 
-    public void setCheck_services(Boolean check_services) {
+    public void setCheck_services(boolean check_services) {
         this.check_services = check_services;
     }
 
-    public Boolean getCheck_fun() {
+    public boolean isCheck_fun() {
         return check_fun;
     }
 
-    public void setCheck_fun(Boolean check_fun) {
+    public void setCheck_fun(boolean check_fun) {
         this.check_fun = check_fun;
     }
 
-    public Boolean getCheck_industry() {
+    public boolean isCheck_industry() {
         return check_industry;
     }
 
-    public void setCheck_industry(Boolean check_industry) {
+    public void setCheck_industry(boolean check_industry) {
         this.check_industry = check_industry;
     }
 
-    public Boolean getCheck_education() {
+    public boolean isCheck_education() {
         return check_education;
     }
 
-    public void setCheck_education(Boolean check_education) {
+    public void setCheck_education(boolean check_education) {
         this.check_education = check_education;
     }
 }

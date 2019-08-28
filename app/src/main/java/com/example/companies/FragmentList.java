@@ -68,7 +68,7 @@ public class FragmentList extends RecyclerView.Adapter<FragmentList.ViewHolder> 
             super(itemView);
 
             companyName = itemView.findViewById(R.id.info_name_id);
-//            companyAddress = itemView.findViewById(R.id.info_address_id);
+            companyAddress = itemView.findViewById(R.id.info_address_id);
             companyTelephone = itemView.findViewById(R.id.info_phone_id);
 
             itemView.setOnClickListener(new View.OnClickListener() {

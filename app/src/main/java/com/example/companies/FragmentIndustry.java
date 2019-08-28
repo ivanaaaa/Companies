@@ -56,7 +56,7 @@ public class FragmentIndustry extends Fragment {
                     Companies company;
                     company = snapshot.getValue(Companies.class);
 
-                    if (company.getCheck_industry() == true) {
+                    if (company.isCheck_industry()) {
                         IndustryCompanies.add(company);
                     }
 
