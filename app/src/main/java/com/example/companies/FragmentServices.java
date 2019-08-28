@@ -23,6 +23,12 @@ import java.util.List;
 
 public class FragmentServices extends Fragment implements FragmentList.OnItemClickListener {
 
+
+    public static final String Company_name = "Name";
+    public static final String Company_address = "Address";
+    public static final String Company_email = "Email";
+    public static final String Company_phone = "Phone";
+    public static final String Company_web = "Web site";
     View v;
     private RecyclerView myrecyclerview;
     private List<Companies> servicesCompanies;
@@ -89,21 +95,21 @@ public class FragmentServices extends Fragment implements FragmentList.OnItemCli
 //        lstServices.add(new Services("Findsmth","ulica8","078965957","https//Findsmth.com",R.drawable.img1));
 //    }
 
-//    @Override
-//    public void onItemClick(int position) {
-//        Intent intent;
-//
-//        intent = new Intent(getActivity(),DetailActivity.class);
-//
-//        Companies clickedItem = servicesCompanies.get(position);
-//
-//        intent.putExtra(Company_name,clickedItem.getName());
-//        intent.putExtra(Company_address,clickedItem.getAddress());
-//        intent.putExtra(Company_email,clickedItem.getEmail());
-//        intent.putExtra(Company_phone,clickedItem.getTelephone());
-//        intent.putExtra(EXTRA_WEB,clickedItem.getWeb_site());
-//
-//        startActivity(intent);
-//    }
+    @Override
+    public void onItemClick(int position) {
+        Intent intent;
+
+        intent = new Intent(getActivity(),InfoActivity.class);
+
+        Companies clickedItem = servicesCompanies.get(position);
+
+        intent.putExtra(Company_name,clickedItem.getName());
+        intent.putExtra(Company_address,clickedItem.getAddress());
+        intent.putExtra(Company_email,clickedItem.getEmail());
+        intent.putExtra(Company_phone,clickedItem.getTelephone());
+        intent.putExtra(Company_web,clickedItem.getWeb_site());
+
+        startActivity(intent);
+    }
 
 }
