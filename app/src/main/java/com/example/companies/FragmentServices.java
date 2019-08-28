@@ -3,6 +3,7 @@ package com.example.companies;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,11 +21,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentServices extends Fragment {
+public class FragmentServices extends Fragment implements FragmentList.OnItemClickListener {
 
     View v;
     private RecyclerView myrecyclerview;
-    private List<Companies> ServicesCompanies;
+    private List<Companies> servicesCompanies;
     private FragmentList fragmentList;
 
     public FragmentServices() {
@@ -38,7 +39,7 @@ public class FragmentServices extends Fragment {
 //        RecyclerViewAdapter recyclerAdapter= new RecyclerViewAdapter(getContext(),lstServices);
         myrecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
 //        myrecyclerview.setAdapter(recyclerAdapter);
-        ServicesCompanies = new ArrayList<>();
+        servicesCompanies = new ArrayList<>();
         getCompaniesList();
         return v;
     }
@@ -48,19 +49,19 @@ public class FragmentServices extends Fragment {
         database_reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ServicesCompanies.clear();
+                servicesCompanies.clear();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Companies company;
                     company = snapshot.getValue(Companies.class);
 
-                    if (company.isCheck_services()){
-                        ServicesCompanies.add(company);
+                    if (company.isCheck_services()) {
+                        servicesCompanies.add(company);
                     }
 
                 }
 
-                fragmentList = new FragmentList(getContext(), ServicesCompanies);
+                fragmentList = new FragmentList(getContext(), servicesCompanies);
                 myrecyclerview.setAdapter(fragmentList);
                 fragmentList.OnItemClickListener((FragmentList.OnItemClickListener) FragmentServices.this);
 
@@ -88,5 +89,21 @@ public class FragmentServices extends Fragment {
 //        lstServices.add(new Services("Findsmth","ulica8","078965957","https//Findsmth.com",R.drawable.img1));
 //    }
 
+//    @Override
+//    public void onItemClick(int position) {
+//        Intent intent;
+//
+//        intent = new Intent(getActivity(),DetailActivity.class);
+//
+//        Companies clickedItem = servicesCompanies.get(position);
+//
+//        intent.putExtra(Company_name,clickedItem.getName());
+//        intent.putExtra(Company_address,clickedItem.getAddress());
+//        intent.putExtra(Company_email,clickedItem.getEmail());
+//        intent.putExtra(Company_phone,clickedItem.getTelephone());
+//        intent.putExtra(EXTRA_WEB,clickedItem.getWeb_site());
+//
+//        startActivity(intent);
+//    }
 
 }
