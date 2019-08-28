@@ -6,6 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
+import android.support.v7.widget.Toolbar;
 
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -13,7 +18,6 @@ import android.widget.Checkable;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.google.firebase.FirebaseApp;
 import com.firebase.client.Firebase;
@@ -30,7 +34,7 @@ import static android.text.TextUtils.*;
 
 public class Input extends AppCompatActivity implements View.OnClickListener {
     public ImageView input;
-    Toolbar appbarid;
+    Toolbar appbar;
     public EditText name_company;
     public EditText address_company;
     public EditText latitude;
@@ -51,8 +55,8 @@ public class Input extends AppCompatActivity implements View.OnClickListener {
 
         FirebaseApp.initializeApp(this);
 
-        appbarid = findViewById(R.id.appbarid);
-        setSupportActionBar(appbarid);
+        appbar = (Toolbar) findViewById(R.id.appbarid);
+        setSupportActionBar(appbar);
         name_company = (EditText) findViewById(R.id.name_company);
         address_company = (EditText) findViewById(R.id.address_company);
         latitude = (EditText) findViewById(R.id.latitude);
@@ -60,12 +64,15 @@ public class Input extends AppCompatActivity implements View.OnClickListener {
         email = (EditText) findViewById(R.id.email);
         phone = (EditText) findViewById(R.id.phone_company);
         web = (EditText) findViewById(R.id.web_company);
-        save = (Button) findViewById(R.id.btnInsert);
-        input = (ImageView) findViewById(R.id.input);
+
+//        input = (ImageView) findViewById(R.id.input);
         services_check = findViewById(R.id.services_check);
         fun_check = findViewById(R.id.fun_check);
         industry_check = findViewById(R.id.industry_check);
         education_check = findViewById(R.id.education_check);
+
+
+        findViewById(R.id.btnInsert).setOnClickListener(this);
     }
 
     public void onClick(View v) {
@@ -90,7 +97,7 @@ public class Input extends AppCompatActivity implements View.OnClickListener {
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-
+        Toast.makeText(this, "inserted", Toast.LENGTH_LONG).show();
     }
 
 //        input = (ImageView) findViewById(R.id.input);
@@ -222,4 +229,21 @@ public class Input extends AppCompatActivity implements View.OnClickListener {
 //            Toast.makeText(Input.this,"Please fill the empty field",Toast.LENGTH_LONG).show();
 //        }
 //    }}
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater;
+
+        menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_when_input, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.back) {
+            startActivity(new Intent(this, MainActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
