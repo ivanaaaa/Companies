@@ -21,7 +21,7 @@ public class FragmentList extends RecyclerView.Adapter<FragmentList.ViewHolder> 
     private Context context;
 
     public interface OnItemClickListener {
-        void onItemClick(int place);
+        void onItemClick(int adapter_position);
     }
 
     public void OnItemClickListener(OnItemClickListener listener) {
@@ -75,10 +75,10 @@ public class FragmentList extends RecyclerView.Adapter<FragmentList.ViewHolder> 
                 @Override
                 public void onClick(View v) {
                     if (clickListener != null) {
-                        int position = getAdapterPosition();
+                        int adapter_position = getAdapterPosition();
 
-                        if (position != RecyclerView.NO_POSITION) {
-                            clickListener.onItemClick(position);
+                        if (adapter_position != RecyclerView.NO_POSITION) {
+                            clickListener.onItemClick(adapter_position);
                         }
                     }
                 }
