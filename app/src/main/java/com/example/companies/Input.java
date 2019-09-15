@@ -59,8 +59,8 @@ public class Input extends AppCompatActivity implements View.OnClickListener {
         setSupportActionBar(appbar);
         name_company = (EditText) findViewById(R.id.name_company);
         address_company = (EditText) findViewById(R.id.address_company);
-        latitude = (EditText) findViewById(R.id.latitude);
-        longitude = (EditText) findViewById(R.id.longitude);
+        latitude = (EditText) findViewById(R.id.latitude_company);
+        longitude = (EditText) findViewById(R.id.longitude_company);
         email = (EditText) findViewById(R.id.email);
         phone = (EditText) findViewById(R.id.phone_company);
         web = (EditText) findViewById(R.id.web_company);
@@ -120,13 +120,13 @@ public class Input extends AppCompatActivity implements View.OnClickListener {
     }
     public void onClick(View v) {
 
-        String name = (String) name_company.getText().toString();
-        String address = (String) address_company.getText().toString();
-        String lat = (String) latitude.getText().toString();
-        String lon = (String) longitude.getText().toString();
-        String mail = (String) email.getText().toString();
-        String tel = (String) phone.getText().toString();
-        String web_site = (String) web.getText().toString();
+        String name = (String) name_company.getText().toString().trim();
+        String address = (String) address_company.getText().toString().trim();
+        String lat = (String) latitude.getText().toString().trim();
+        String lon = (String) longitude.getText().toString().trim();
+        String mail = (String) email.getText().toString().trim();
+        String tel = (String) phone.getText().toString().trim();
+        String web_site = (String) web.getText().toString().trim();
         boolean services = (boolean) services_check.isChecked();
         boolean fun = (boolean) fun_check.isChecked();
         boolean industry = (boolean) industry_check.isChecked();
@@ -138,7 +138,7 @@ public class Input extends AppCompatActivity implements View.OnClickListener {
             ref = FirebaseDatabase.getInstance().getReference("Companies");
             company_id = ref.push().getKey();
             Company = new Companies(company_id, name, address, lat, lon, mail, tel, web_site, services, fun, industry, education);
-            ref.child(1).setValue(Company);
+            ref.child(company_id).setValue(Company);
 
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
