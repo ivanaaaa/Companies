@@ -39,8 +39,25 @@ public class FragmentEducation extends Fragment implements FragmentList.OnItemCl
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.education_fragment, container, false);
         myrecyclerview = (RecyclerView) v.findViewById(R.id.education_recyclerview);
+
 //        RecyclerViewAdapter recyclerAdapter= new RecyclerViewAdapter(getContext(),lstEducation);
         myrecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
+        myrecyclerview.setAdapter(new RecyclerView.Adapter() {
+            @Override
+            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                return null;
+            }
+
+            @Override
+            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
+            }
+
+            @Override
+            public int getItemCount() {
+                return 0;
+            }
+        });
 //        myrecyclerview.setAdapter(recyclerAdapter);
 
         educationCompanies = new ArrayList<>();

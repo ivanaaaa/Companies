@@ -40,10 +40,26 @@ public class FragmentFun extends Fragment implements FragmentList.OnItemClickLis
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fun_fragment, container, false);
         myrecyclerview = (RecyclerView) v.findViewById(R.id.fun_recyclerview);
+
 //        RecyclerViewAdapter recyclerAdapter= new RecyclerViewAdapter(getContext(),lstFun);
         myrecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
 //        myrecyclerview.setAdapter(recyclerAdapter);
+        myrecyclerview.setAdapter(new RecyclerView.Adapter() {
+            @Override
+            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                return null;
+            }
 
+            @Override
+            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
+            }
+
+            @Override
+            public int getItemCount() {
+                return 0;
+            }
+        });
         funCompanies = new ArrayList<>();
         getCompaniesList();
         return v;
