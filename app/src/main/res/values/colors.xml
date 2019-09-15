@@ -3,5 +3,5 @@
     <color name="colorPrimary">#03A9F4</color>
     <color name="colorPrimaryDark">#1980DA</color>
     <color name="colorAccent">#1CDBF3</color>
-    <color name="backgroundfragment">#0F6FBE</color>
+    <color name="backgroundfragment">#FFFFFF</color>
 </resources>
