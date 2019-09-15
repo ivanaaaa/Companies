@@ -11,8 +11,8 @@ public class Companies extends Application {
     private String Company_id;
     private String Name;
     private String Address;
-    public String Latitude;
-    public String Longitude;
+    private String Latitude;
+    private String Longitude;
     private String Email;
     private String Telephone;
     private String Web_site;
@@ -25,14 +25,14 @@ public class Companies extends Application {
     }
 
     public Companies(String company_id, String name, String address, String latitude, String longitude, String email, String telephone, String web_site, boolean check_services, boolean check_fun, boolean check_industry, boolean check_education) {
-        Company_id = company_id;
-        Name = name;
-        Address = address;
-        Latitude = latitude;
-        Longitude = longitude;
-        Email = email;
-        Telephone = telephone;
-        Web_site = web_site;
+        this.Company_id = company_id;
+        this.Name = name;
+        this.Address = address;
+        this.Latitude = latitude;
+        this.Longitude = longitude;
+        this.Email = email;
+        this.Telephone = telephone;
+        this.Web_site = web_site;
         this.check_services = check_services;
         this.check_fun = check_fun;
         this.check_industry = check_industry;
@@ -44,7 +44,7 @@ public class Companies extends Application {
     }
 
     public void setCompany_id(String company_id) {
-        Company_id = company_id;
+        this.Company_id = company_id;
     }
 
     public String getName() {
@@ -52,7 +52,7 @@ public class Companies extends Application {
     }
 
     public void setName(String name) {
-        Name = name;
+        this.Name = name;
     }
 
     public String getAddress() {
@@ -60,7 +60,7 @@ public class Companies extends Application {
     }
 
     public void setAddress(String address) {
-        Address = address;
+        this.Address = address;
     }
 
     public String getLatitude() {
@@ -68,7 +68,7 @@ public class Companies extends Application {
     }
 
     public void setLatitude(String latitude) {
-        Latitude = latitude;
+        this.Latitude = latitude;
     }
 
     public String getLongitude() {
@@ -76,7 +76,7 @@ public class Companies extends Application {
     }
 
     public void setLongitude(String longitude) {
-        Longitude = longitude;
+        this.Longitude = longitude;
     }
 
     public String getEmail() {
@@ -84,7 +84,7 @@ public class Companies extends Application {
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.Email = email;
     }
 
     public String getTelephone() {
@@ -92,7 +92,7 @@ public class Companies extends Application {
     }
 
     public void setTelephone(String telephone) {
-        Telephone = telephone;
+        this.Telephone = telephone;
     }
 
     public String getWeb_site() {
@@ -100,7 +100,7 @@ public class Companies extends Application {
     }
 
     public void setWeb_site(String web_site) {
-        Web_site = web_site;
+        this.Web_site = web_site;
     }
 
     public boolean isCheck_services() {
