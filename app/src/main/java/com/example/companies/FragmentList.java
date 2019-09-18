@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -67,9 +68,9 @@ public class FragmentList extends RecyclerView.Adapter<FragmentList.ViewHolder> 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            companyName = itemView.findViewById(R.id.info_name_id);
-            companyAddress = itemView.findViewById(R.id.info_address_id);
-            companyTelephone = itemView.findViewById(R.id.info_phone_id);
+            companyName = itemView.findViewById(R.id.companyName);
+            companyAddress = itemView.findViewById(R.id.companyAddress);
+            companyTelephone = itemView.findViewById(R.id.companyTelephone);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

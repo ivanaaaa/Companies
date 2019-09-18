@@ -5,7 +5,7 @@
     android:layout_width="350dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    tools:context=".FragmentList"
+tools:context=".FragmentList"
 
     >
 
@@ -18,7 +18,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/info_name_id"
+            android:id="@+id/companyName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="90dp"
@@ -28,7 +28,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/info_phone_id"
+            android:id="@+id/companyTelephone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -37,7 +37,7 @@
             android:textColor="@android:color/white"
             android:textSize="18sp" />
         <TextView
-            android:id="@+id/info_address_id"
+            android:id="@+id/companyAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -74,7 +74,7 @@
 
 
     <ImageView
-        android:id="@+id/info_image_id"
+        android:id="@+id/companyImage"
         android:contentDescription="@string/company_name"
         android:layout_width="120dp"
         android:layout_height="120dp"
