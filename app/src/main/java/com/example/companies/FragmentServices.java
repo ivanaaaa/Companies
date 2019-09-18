@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +35,7 @@ public class FragmentServices extends Fragment implements FragmentList.OnItemCli
     private List<Companies> servicesList;
     private FragmentList companiesList;
 
+    private SearchView searchView;
     public FragmentServices() {
     }
 
@@ -43,6 +45,22 @@ public class FragmentServices extends Fragment implements FragmentList.OnItemCli
         v = inflater.inflate(R.layout.services_fragment, container, false);
         myRecyclerView = v.findViewById(R.id.services_recyclerView);
 
+
+
+        searchView = v.findViewById(R.id.searchView);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                companiesList.getFilter().filter(s);
+                return false;
+            }
+        });
 //        RecyclerViewAdapter recyclerAdapter= new RecyclerViewAdapter(getContext(),lstServices);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 //        myRecyclerView.setAdapter(new RecyclerView.Adapter() {
@@ -86,7 +104,7 @@ public class FragmentServices extends Fragment implements FragmentList.OnItemCli
 
                 companiesList = new FragmentList(getContext(), servicesList);
                 myRecyclerView.setAdapter(companiesList);
-                companiesList.setOnItemClickListener(FragmentServices.this);
+                companiesList.OnItemClickListener(FragmentServices.this);
 
             }
 
