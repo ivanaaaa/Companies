@@ -28,9 +28,9 @@ public class FragmentIndustry extends Fragment implements FragmentList.OnItemCli
     public static final String Company_web = "Web site";
 
     View v;
-    private RecyclerView myrecyclerview;
-    private List<Companies> industryCompanies;
-    private FragmentList fragmentList;
+    private RecyclerView myRecyclerView;
+    private List<Companies> industryList;
+    private FragmentList companiesList;
 
     public FragmentIndustry() {
     }
@@ -40,54 +40,54 @@ public class FragmentIndustry extends Fragment implements FragmentList.OnItemCli
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.industry_fragment, container, false);
-        myrecyclerview = (RecyclerView) v.findViewById(R.id.industry_recyclerview);
+        myRecyclerView = (RecyclerView) v.findViewById(R.id.industry_recyclerView);
 
 //        RecyclerViewAdapter recyclerAdapter= new RecyclerViewAdapter(getContext(),lstIndustry);
-        myrecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
-        myrecyclerview.setAdapter(new RecyclerView.Adapter() {
-            @Override
-            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                return null;
-            }
-
-            @Override
-            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
-            }
-
-            @Override
-            public int getItemCount() {
-                return 0;
-            }
-        });
+        myRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        myRecyclerView.setAdapter(new RecyclerView.Adapter() {
+//            @Override
+//            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//                return null;
+//            }
+//
+//            @Override
+//            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+//
+//            }
+//
+//            @Override
+//            public int getItemCount() {
+//                return 0;
+//            }
+//        });
 //        myrecyclerview.setAdapter(recyclerAdapter);
 
-        industryCompanies = new ArrayList<>();
-        getCompaniesList();
+        industryList = new ArrayList<>();
+        takeCompaniesList();
         return v;
     }
 
 
-    private void getCompaniesList() {
-        final DatabaseReference database_reference = FirebaseDatabase.getInstance().getReference("Companies");
-        database_reference.addValueEventListener(new ValueEventListener() {
+    private void takeCompaniesList() {
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Companies");
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                industryCompanies.clear();
+                industryList.clear();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Companies company;
                     company = snapshot.getValue(Companies.class);
 
                     if (company.isCheck_industry()) {
-                        industryCompanies.add(company);
+                        industryList.add(company);
                     }
 
                 }
 
-                fragmentList = new FragmentList(getContext(), industryCompanies);
-                myrecyclerview.setAdapter(fragmentList);
-                fragmentList.OnItemClickListener((FragmentList.OnItemClickListener) FragmentIndustry.this);
+                companiesList = new FragmentList(getContext(), industryList);
+                myRecyclerView.setAdapter(companiesList);
+                companiesList.setOnItemClickListener(FragmentIndustry.this);
 
             }
 
@@ -118,7 +118,7 @@ public class FragmentIndustry extends Fragment implements FragmentList.OnItemCli
 
         intent = new Intent(getActivity(),InfoActivity.class);
 
-        Companies clickedItem = industryCompanies.get(position);
+        Companies clickedItem = industryList.get(position);
 
         intent.putExtra(Company_name,clickedItem.getName());
         intent.putExtra(Company_address,clickedItem.getAddress());

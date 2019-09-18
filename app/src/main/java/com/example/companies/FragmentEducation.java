@@ -29,63 +29,61 @@ public class FragmentEducation extends Fragment implements FragmentList.OnItemCl
     public static final String Company_web = "Web site";
 
     View v;
-    private RecyclerView myrecyclerview;
-    private List<Companies> educationCompanies;
-    private FragmentList fragmentList;
+    private RecyclerView myRecyclerView;
+    private List<Companies> educationList;
+    private FragmentList companiesList;
 
     public FragmentEducation() {
     }
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.education_fragment, container, false);
-        myrecyclerview = (RecyclerView) v.findViewById(R.id.education_recyclerview);
+        myRecyclerView = v.findViewById(R.id.education_recyclerView);
 
 //        RecyclerViewAdapter recyclerAdapter= new RecyclerViewAdapter(getContext(),lstEducation);
-        myrecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
-        myrecyclerview.setAdapter(new RecyclerView.Adapter() {
-            @Override
-            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                return null;
-            }
-
-            @Override
-            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
-            }
-
-            @Override
-            public int getItemCount() {
-                return 0;
-            }
-        });
-//        myrecyclerview.setAdapter(recyclerAdapter);
-
-        educationCompanies = new ArrayList<>();
-        getCompaniesList();
+        myRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        myRecyclerView.setAdapter(new RecyclerView.Adapter() {
+//            @Override
+//            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//                return null;
+//            }
+//
+//            @Override
+//            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+//
+//            }
+//
+//            @Override
+//            public int getItemCount() {
+//                return 0;
+//            }
+//        });
+//        myRecyclerView.setAdapter(recyclerAdapter);
+        educationList = new ArrayList<>();
+        takeCompaniesList();
         return v;
     }
 
-    private void getCompaniesList() {
-        final DatabaseReference database_reference = FirebaseDatabase.getInstance().getReference("Companies");
-        database_reference.addValueEventListener(new ValueEventListener() {
+    private void takeCompaniesList() {
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Companies");
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                educationCompanies.clear();
+                educationList.clear();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Companies company;
                     company = snapshot.getValue(Companies.class);
 
                     if (company.isCheck_education()) {
-                        educationCompanies.add(company);
+                        educationList.add(company);
                     }
 
                 }
 
-                fragmentList = new FragmentList(getContext(), educationCompanies);
-                myrecyclerview.setAdapter(fragmentList);
-                fragmentList.OnItemClickListener((FragmentList.OnItemClickListener) FragmentEducation.this);
-
+                companiesList = new FragmentList(getContext(), educationList);
+                myRecyclerView.setAdapter(companiesList);
+                companiesList.setOnItemClickListener(FragmentEducation.this);
             }
 
             @Override
@@ -113,15 +111,15 @@ public class FragmentEducation extends Fragment implements FragmentList.OnItemCl
     public void onItemClick(int position) {
         Intent intent;
 
-        intent = new Intent(getActivity(),InfoActivity.class);
+        intent = new Intent(getActivity(), InfoActivity.class);
 
-        Companies clickedItem = educationCompanies.get(position);
+        Companies clickedItem = educationList.get(position);
 
-        intent.putExtra(Company_name,clickedItem.getName());
-        intent.putExtra(Company_address,clickedItem.getAddress());
-        intent.putExtra(Company_email,clickedItem.getEmail());
-        intent.putExtra(Company_phone,clickedItem.getTelephone());
-        intent.putExtra(Company_web,clickedItem.getWeb_site());
+        intent.putExtra(Company_name, clickedItem.getName());
+        intent.putExtra(Company_address, clickedItem.getAddress());
+        intent.putExtra(Company_email, clickedItem.getEmail());
+        intent.putExtra(Company_phone, clickedItem.getTelephone());
+        intent.putExtra(Company_web, clickedItem.getWeb_site());
 
         startActivity(intent);
     }

@@ -30,9 +30,9 @@ public class FragmentServices extends Fragment implements FragmentList.OnItemCli
     public static final String Company_phone = "Phone";
     public static final String Company_web = "Web site";
     View v;
-    private RecyclerView myrecyclerview;
-    private List<Companies> servicesCompanies;
-    private FragmentList fragmentList;
+    private RecyclerView myRecyclerView;
+    private List<Companies> servicesList;
+    private FragmentList companiesList;
 
     public FragmentServices() {
     }
@@ -41,52 +41,52 @@ public class FragmentServices extends Fragment implements FragmentList.OnItemCli
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.services_fragment, container, false);
-        myrecyclerview = v.findViewById(R.id.services_recyclerview);
+        myRecyclerView = v.findViewById(R.id.services_recyclerView);
 
 //        RecyclerViewAdapter recyclerAdapter= new RecyclerViewAdapter(getContext(),lstServices);
-        myrecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
-        myrecyclerview.setAdapter(new RecyclerView.Adapter() {
-            @Override
-            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                return null;
-            }
-
-            @Override
-            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
-            }
-
-            @Override
-            public int getItemCount() {
-                return 0;
-            }
-        });
+        myRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        myRecyclerView.setAdapter(new RecyclerView.Adapter() {
+//            @Override
+//            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//                return null;
+//            }
+//
+//            @Override
+//            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+//
+//            }
+//
+//            @Override
+//            public int getItemCount() {
+//                return 0;
+//            }
+//        });
 //        myrecyclerview.setAdapter(recyclerAdapter);
-        servicesCompanies = new ArrayList<>();
-        getCompaniesList();
+        servicesList = new ArrayList<>();
+        takeCompaniesList();
         return v;
     }
 
-    private void getCompaniesList() {
+    private void takeCompaniesList() {
         final DatabaseReference database_reference = FirebaseDatabase.getInstance().getReference("Companies");
         database_reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                servicesCompanies.clear();
+                servicesList.clear();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Companies company;
                     company = snapshot.getValue(Companies.class);
 
                     if (company.isCheck_services()) {
-                        servicesCompanies.add(company);
+                        servicesList.add(company);
                     }
 
                 }
 
-                fragmentList = new FragmentList(getContext(), servicesCompanies);
-                myrecyclerview.setAdapter(fragmentList);
-                fragmentList.OnItemClickListener((FragmentList.OnItemClickListener) FragmentServices.this);
+                companiesList = new FragmentList(getContext(), servicesList);
+                myRecyclerView.setAdapter(companiesList);
+                companiesList.setOnItemClickListener(FragmentServices.this);
 
             }
 
@@ -118,7 +118,7 @@ public class FragmentServices extends Fragment implements FragmentList.OnItemCli
 
         intent = new Intent(getActivity(),InfoActivity.class);
 
-        Companies clickedItem = servicesCompanies.get(position);
+        Companies clickedItem = servicesList.get(position);
 
         intent.putExtra(Company_name,clickedItem.getName());
         intent.putExtra(Company_address,clickedItem.getAddress());

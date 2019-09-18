@@ -28,9 +28,9 @@ public class FragmentFun extends Fragment implements FragmentList.OnItemClickLis
     public static final String Company_phone = "Phone";
     public static final String Company_web = "Web site";
     View v;
-    private RecyclerView myrecyclerview;
-    private List<Companies> funCompanies;
-    private FragmentList fragmentList;
+    private RecyclerView myRecyclerView;
+    private List<Companies> funList;
+    private FragmentList companiesList;
 
     public FragmentFun() {
     }
@@ -39,52 +39,52 @@ public class FragmentFun extends Fragment implements FragmentList.OnItemClickLis
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fun_fragment, container, false);
-        myrecyclerview = (RecyclerView) v.findViewById(R.id.fun_recyclerview);
+        myRecyclerView = v.findViewById(R.id.fun_recyclerView);
 
 //        RecyclerViewAdapter recyclerAdapter= new RecyclerViewAdapter(getContext(),lstFun);
-        myrecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
+        myRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 //        myrecyclerview.setAdapter(recyclerAdapter);
-        myrecyclerview.setAdapter(new RecyclerView.Adapter() {
-            @Override
-            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                return null;
-            }
-
-            @Override
-            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
-            }
-
-            @Override
-            public int getItemCount() {
-                return 0;
-            }
-        });
-        funCompanies = new ArrayList<>();
-        getCompaniesList();
+//        myRecyclerView.setAdapter(new RecyclerView.Adapter() {
+//            @Override
+//            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//                return null;
+//            }
+//
+//            @Override
+//            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+//
+//            }
+//
+//            @Override
+//            public int getItemCount() {
+//                return 0;
+//            }
+//        });
+        funList = new ArrayList<>();
+        takeCompaniesList();
         return v;
     }
 
-    private void getCompaniesList() {
-        final DatabaseReference database_reference = FirebaseDatabase.getInstance().getReference("Companies");
-        database_reference.addValueEventListener(new ValueEventListener() {
+    private void takeCompaniesList() {
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Companies");
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                funCompanies.clear();
+                funList.clear();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Companies company;
                     company = snapshot.getValue(Companies.class);
 
                     if (company.isCheck_fun()) {
-                        funCompanies.add(company);
+                        funList.add(company);
                     }
 
                 }
 
-                fragmentList = new FragmentList(getContext(), funCompanies);
-                myrecyclerview.setAdapter(fragmentList);
-                fragmentList.OnItemClickListener((FragmentList.OnItemClickListener) FragmentFun.this);
+                companiesList = new FragmentList(getContext(), funList);
+                myRecyclerView.setAdapter(companiesList);
+                companiesList.setOnItemClickListener(FragmentFun.this);
 
             }
 
@@ -115,7 +115,7 @@ public class FragmentFun extends Fragment implements FragmentList.OnItemClickLis
 
         intent = new Intent(getActivity(),InfoActivity.class);
 
-        Companies clickedItem = funCompanies.get(position);
+        Companies clickedItem = funList.get(position);
 
         intent.putExtra(Company_name,clickedItem.getName());
         intent.putExtra(Company_address,clickedItem.getAddress());
