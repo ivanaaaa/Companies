@@ -2,10 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="350dp"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
 tools:context=".FragmentList"
+    android:background="@color/backgroundfragment"
 
     >
 
@@ -13,7 +14,7 @@ tools:context=".FragmentList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:background="@color/backgroundfragment"
+        android:background="@color/infoColor"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -45,6 +46,25 @@ tools:context=".FragmentList"
             android:text="@string/address"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
+        <TextView
+            android:id="@+id/companyWeb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:text="Web"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/companyEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:text="Email"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
 
         <Button
             android:id="@+id/info_btn_call"

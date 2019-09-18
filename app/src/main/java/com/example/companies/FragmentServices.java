@@ -35,6 +35,7 @@ public class FragmentServices extends Fragment implements FragmentList.OnItemCli
     private FragmentList companiesList;
 
     private SearchView searchView;
+
     public FragmentServices() {
     }
 
@@ -43,7 +44,6 @@ public class FragmentServices extends Fragment implements FragmentList.OnItemCli
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.services_fragment, container, false);
         myRecyclerView = v.findViewById(R.id.services_recyclerView);
-
 
 
         searchView = v.findViewById(R.id.searchView);
@@ -133,15 +133,15 @@ public class FragmentServices extends Fragment implements FragmentList.OnItemCli
     public void onItemClick(int position) {
         Intent intent;
 
-        intent = new Intent(getActivity(),InfoActivity.class);
+        intent = new Intent(getActivity(), InfoActivity.class);
 
         Companies.CompanyData clickedItem = servicesList.get(position);
 
-        intent.putExtra(Company_name,clickedItem.getName());
-        intent.putExtra(Company_address,clickedItem.getAddress());
-        intent.putExtra(Company_email,clickedItem.getEmail());
-        intent.putExtra(Company_phone,clickedItem.getTelephone());
-        intent.putExtra(Company_web,clickedItem.getWeb_site());
+        intent.putExtra(Company_name, clickedItem.getName());
+        intent.putExtra(Company_address, clickedItem.getAddress());
+        intent.putExtra(Company_email, clickedItem.getEmail());
+        intent.putExtra(Company_phone, clickedItem.getTelephone());
+        intent.putExtra(Company_web, clickedItem.getWeb_site());
 
         startActivity(intent);
     }

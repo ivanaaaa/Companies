@@ -19,7 +19,7 @@ public class InfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.info_companies);
 
         Intent intent = getIntent();
 
@@ -30,11 +30,11 @@ public class InfoActivity extends AppCompatActivity {
         String web = intent.getStringExtra(Company_web);
 
 
-        TextView textViewName = findViewById(R.id.companyN);
-        TextView textViewAddress = findViewById(R.id.companyA);
-        TextView textViewEmail = findViewById(R.id.companyE);
-        TextView textViewPhone = findViewById(R.id.companyP);
-        TextView textViewWeb = findViewById(R.id.companyW);
+        TextView textViewName = findViewById(R.id.companyName);
+        TextView textViewAddress = findViewById(R.id.companyAddress);
+        TextView textViewEmail = findViewById(R.id.companyEmail);
+        TextView textViewPhone = findViewById(R.id.companyTelephone);
+        TextView textViewWeb = findViewById(R.id.companyWeb);
 
         textViewName.setText(name);
         textViewAddress.setText(address);
