@@ -19,5 +19,6 @@
     <string name="mobile_call">Mobile Call</string>
     <string name="write_message">Write Message</string>
     <string name="name">Name</string>
+    <string name="web">Web</string>
 
 </resources>

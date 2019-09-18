@@ -15,59 +15,148 @@ tools:context=".FragmentList"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:background="@color/infoColor"
-        android:gravity="center_horizontal"
+        android:gravity="fill_horizontal"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/companyName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="90dp"
-            android:text="@string/company_name"
-            android:textColor="@android:color/white"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="280dp">
 
-        <TextView
-            android:id="@+id/companyTelephone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
-            android:text="@string/telephone"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/companyName"
+                android:layout_width="223dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="102dp"
+                android:layout_marginEnd="22dp"
+                android:text="@string/company_name"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/companyAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
-            android:text="@string/address"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
-        <TextView
-            android:id="@+id/companyWeb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
-            android:text="Web"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/companyTelephone"
+                android:layout_width="223dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/companyName"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="22dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/telephone"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/companyEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
-            android:text="Email"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/companyAddress"
+                android:layout_width="223dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/companyTelephone"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="22dp"
+                android:text="@string/address"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
 
+            <TextView
+                android:id="@+id/companyWeb"
+                android:layout_width="223dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/companyEmail"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="22dp"
+                android:layout_marginBottom="18dp"
+                android:text="@string/web"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
 
+            <TextView
+                android:id="@+id/companyEmail"
+                android:layout_width="223dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/companyAddress"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="22dp"
+                android:text="Email"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/description_web"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="18dp"
+                android:layout_toStartOf="@+id/companyWeb"
+                android:text="Web: "
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/description_email"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/description_web"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toStartOf="@+id/companyEmail"
+                android:text="Email: "
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/description_address"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/description_email"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toStartOf="@+id/companyAddress"
+                android:text="Address: "
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/description_telephone"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/description_address"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toStartOf="@+id/companyTelephone"
+                android:text="Telephone: "
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/description_name"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/description_telephone"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toStartOf="@+id/companyName"
+                android:text="Name: "
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
         <Button
             android:id="@+id/info_btn_call"
             android:padding="20dp"
