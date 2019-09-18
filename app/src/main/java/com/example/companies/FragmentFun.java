@@ -30,7 +30,7 @@ public class FragmentFun extends Fragment implements FragmentList.OnItemClickLis
     public static final String Company_web = "Web site";
     View v;
     private RecyclerView myRecyclerView;
-    private List<Companies> funList;
+    private List<Companies.CompanyData> funList;
     private FragmentList companiesList;
 
     private SearchView searchView;
@@ -78,7 +78,7 @@ public class FragmentFun extends Fragment implements FragmentList.OnItemClickLis
 //                return 0;
 //            }
 //        });
-        funList = new ArrayList<>();
+        funList = new ArrayList<Companies.CompanyData>();
         takeCompaniesList();
         return v;
     }
@@ -91,8 +91,8 @@ public class FragmentFun extends Fragment implements FragmentList.OnItemClickLis
                 funList.clear();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Companies company;
-                    company = snapshot.getValue(Companies.class);
+                    Companies.CompanyData company;
+                    company = snapshot.getValue(Companies.CompanyData.class);
 
                     if (company.isCheck_fun()) {
                         funList.add(company);
@@ -133,7 +133,7 @@ public class FragmentFun extends Fragment implements FragmentList.OnItemClickLis
 
         intent = new Intent(getActivity(), InfoActivity.class);
 
-        Companies clickedItem = funList.get(position);
+        Companies.CompanyData clickedItem = funList.get(position);
 
         intent.putExtra(Company_name, clickedItem.getName());
         intent.putExtra(Company_address, clickedItem.getAddress());

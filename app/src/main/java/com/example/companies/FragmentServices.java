@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +31,7 @@ public class FragmentServices extends Fragment implements FragmentList.OnItemCli
     public static final String Company_web = "Web site";
     View v;
     private RecyclerView myRecyclerView;
-    private List<Companies> servicesList;
+    private List<Companies.CompanyData> servicesList;
     private FragmentList companiesList;
 
     private SearchView searchView;
@@ -80,23 +79,23 @@ public class FragmentServices extends Fragment implements FragmentList.OnItemCli
 //            }
 //        });
 //        myrecyclerview.setAdapter(recyclerAdapter);
-        servicesList = new ArrayList<>();
+        servicesList = new ArrayList<Companies.CompanyData>();
         takeCompaniesList();
         return v;
     }
 
     private void takeCompaniesList() {
-        final DatabaseReference database_reference = FirebaseDatabase.getInstance().getReference("Companies");
+        final DatabaseReference database_reference = FirebaseDatabase.getInstance().getReference();
         database_reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 servicesList.clear();
 
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Companies company;
-                    company = snapshot.getValue(Companies.class);
+                for (DataSnapshot snapshot : dataSnapshot.child("Companies").getChildren()) {
+                    Companies.CompanyData company;
+                    company = snapshot.getValue(Companies.CompanyData.class);
 
-                    if (company.isCheck_services()) {
+                    if (company != null && company.isCheck_services()) {
                         servicesList.add(company);
                     }
 
@@ -136,7 +135,7 @@ public class FragmentServices extends Fragment implements FragmentList.OnItemCli
 
         intent = new Intent(getActivity(),InfoActivity.class);
 
-        Companies clickedItem = servicesList.get(position);
+        Companies.CompanyData clickedItem = servicesList.get(position);
 
         intent.putExtra(Company_name,clickedItem.getName());
         intent.putExtra(Company_address,clickedItem.getAddress());

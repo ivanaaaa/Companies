@@ -1,14 +1,11 @@
 package com.example.companies;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +30,7 @@ public class FragmentInfo extends Fragment implements FragmentList.OnItemClickLi
 
     private RecyclerView recyclerView;
     private FragmentList companyAdapter;
-    private List<Companies> companies;
+    private List<Companies.CompanyData> companies;
 
 //    private SearchView searchView;
 
@@ -62,7 +59,7 @@ public class FragmentInfo extends Fragment implements FragmentList.OnItemClickLi
 //        });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        companies = new ArrayList<>();
+        companies = new ArrayList<Companies.CompanyData>();
         getCompanies();
 
         return view;
@@ -78,7 +75,7 @@ public class FragmentInfo extends Fragment implements FragmentList.OnItemClickLi
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                    Companies company = snapshot.getValue(Companies.class);
+                    Companies.CompanyData company = snapshot.getValue(Companies.CompanyData.class);
                     if (company.isCheck_services() || company.isCheck_industry() || company.isCheck_fun() || company.isCheck_education()) {
                         companies.add(company);
                     }
@@ -102,7 +99,7 @@ public class FragmentInfo extends Fragment implements FragmentList.OnItemClickLi
 
         Intent intent = new Intent(getActivity(), InfoActivity.class);
 
-        Companies clickedItem = companies.get(position);
+        Companies.CompanyData clickedItem = companies.get(position);
 
         intent.putExtra(Company_name, clickedItem.getName());
         intent.putExtra(Company_address, clickedItem.getAddress());

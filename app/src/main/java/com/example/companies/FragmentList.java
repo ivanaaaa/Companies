@@ -6,20 +6,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
-import android.widget.Filter;
-import android.widget.Filterable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentList extends RecyclerView.Adapter<FragmentList.ViewHolder> implements Filterable {
 
-    private List<Companies> allCompanies;
-    private List<Companies> previewCompanies;
+    private ArrayList<Companies.CompanyData> allCompanies;
+    private List<Companies.CompanyData> previewCompanies;
     private OnItemClickListener clickListener;
     private Context context;
 
@@ -33,7 +30,7 @@ public class FragmentList extends RecyclerView.Adapter<FragmentList.ViewHolder> 
     }
 
     //set
-    public FragmentList(Context context, List<Companies> previewCompanies) {
+    public FragmentList(Context context, List<Companies.CompanyData> previewCompanies) {
         this.context = context;
         this.previewCompanies = previewCompanies;
         allCompanies = new ArrayList<>(previewCompanies);
@@ -42,18 +39,19 @@ public class FragmentList extends RecyclerView.Adapter<FragmentList.ViewHolder> 
 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.info_companies, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.companies_item, viewGroup, false);
         return new FragmentList.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Companies company;
+        Companies.CompanyData company;
 
         company = previewCompanies.get(i);
         viewHolder.companyName.setText(company.getName());
         viewHolder.companyAddress.setText(company.getAddress());
         viewHolder.companyTelephone.setText(company.getTelephone());
+        viewHolder.companyWeb.setText(company.getWeb_site());
     }
 
     @Override
@@ -70,12 +68,12 @@ public class FragmentList extends RecyclerView.Adapter<FragmentList.ViewHolder> 
     private Filter doFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<Companies> filterList = new ArrayList<>();
+            List<Companies.CompanyData> filterList = new ArrayList<>();
             if (constraint == null || constraint.length() == 0) {
                 filterList.addAll(allCompanies);
             } else {
                 String enterForFilter = constraint.toString().toLowerCase().trim();
-                for (Companies company : allCompanies) {
+                for (Companies.CompanyData company : allCompanies) {
                     if (company.getName().toLowerCase().contains(enterForFilter)) {
                         filterList.add(company);
                     }
@@ -99,6 +97,7 @@ public class FragmentList extends RecyclerView.Adapter<FragmentList.ViewHolder> 
         private TextView companyName;
         private TextView companyAddress;
         private TextView companyTelephone;
+        private TextView companyWeb;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -106,6 +105,7 @@ public class FragmentList extends RecyclerView.Adapter<FragmentList.ViewHolder> 
             companyName = itemView.findViewById(R.id.companyName);
             companyAddress = itemView.findViewById(R.id.companyAddress);
             companyTelephone = itemView.findViewById(R.id.companyTelephone);
+            companyWeb = itemView.findViewById(R.id.companyWeb);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -30,7 +30,7 @@ public class FragmentIndustry extends Fragment implements FragmentList.OnItemCli
 
     View v;
     private RecyclerView myRecyclerView;
-    private List<Companies> industryList;
+    private List<Companies.CompanyData> industryList;
     private FragmentList companiesList;
 
     private SearchView searchView;
@@ -80,7 +80,7 @@ public class FragmentIndustry extends Fragment implements FragmentList.OnItemCli
 //        });
 //        myrecyclerview.setAdapter(recyclerAdapter);
 
-        industryList = new ArrayList<>();
+        industryList = new ArrayList<Companies.CompanyData>();
         takeCompaniesList();
         return v;
     }
@@ -94,8 +94,8 @@ public class FragmentIndustry extends Fragment implements FragmentList.OnItemCli
                 industryList.clear();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Companies company;
-                    company = snapshot.getValue(Companies.class);
+                    Companies.CompanyData company;
+                    company = snapshot.getValue(Companies.CompanyData.class);
 
                     if (company.isCheck_industry()) {
                         industryList.add(company);
@@ -136,7 +136,7 @@ public class FragmentIndustry extends Fragment implements FragmentList.OnItemCli
 
         intent = new Intent(getActivity(), InfoActivity.class);
 
-        Companies clickedItem = industryList.get(position);
+        Companies.CompanyData clickedItem = industryList.get(position);
 
         intent.putExtra(Company_name, clickedItem.getName());
         intent.putExtra(Company_address, clickedItem.getAddress());

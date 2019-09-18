@@ -31,7 +31,7 @@ public class FragmentEducation extends Fragment implements FragmentList.OnItemCl
 
     View v;
     private RecyclerView myRecyclerView;
-    private List<Companies> educationList;
+    private List<Companies.CompanyData> educationList;
     private FragmentList companiesList;
 
     private SearchView searchView;
@@ -77,7 +77,7 @@ public class FragmentEducation extends Fragment implements FragmentList.OnItemCl
 //            }
 //        });
 //        myRecyclerView.setAdapter(recyclerAdapter);
-        educationList = new ArrayList<>();
+        educationList = new ArrayList<Companies.CompanyData>();
         takeCompaniesList();
         return v;
     }
@@ -90,8 +90,8 @@ public class FragmentEducation extends Fragment implements FragmentList.OnItemCl
                 educationList.clear();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Companies company;
-                    company = snapshot.getValue(Companies.class);
+                    Companies.CompanyData company;
+                    company = snapshot.getValue(Companies.CompanyData.class);
 
                     if (company.isCheck_education()) {
                         educationList.add(company);
@@ -131,7 +131,7 @@ public class FragmentEducation extends Fragment implements FragmentList.OnItemCl
 
         intent = new Intent(getActivity(), InfoActivity.class);
 
-        Companies clickedItem = educationList.get(position);
+        Companies.CompanyData clickedItem = educationList.get(position);
 
         intent.putExtra(Company_name, clickedItem.getName());
         intent.putExtra(Company_address, clickedItem.getAddress());

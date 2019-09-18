@@ -9,7 +9,6 @@
     <string name="fun">Fun</string>
     <string name="industry">Industry</string>
     <string name="education">Education</string>
-    <string name="name">Name</string>
     <string name="address">Address</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
@@ -19,5 +18,6 @@
     <string name="category">Category</string>
     <string name="mobile_call">Mobile Call</string>
     <string name="write_message">Write Message</string>
+    <string name="name">Name</string>
 
 </resources>

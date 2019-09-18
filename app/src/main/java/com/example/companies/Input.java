@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -133,16 +134,18 @@ public class Input extends AppCompatActivity implements View.OnClickListener {
         boolean education = (boolean) education_check.isChecked();
         if (!validator(name, address, lat, lon, mail, tel, web_site))
         {
-            Companies Company;
+            Companies.CompanyData Company;
             String company_id;
-            ref = FirebaseDatabase.getInstance().getReference("Companies");
-            company_id = ref.push().getKey();
-            Company = new Companies(company_id, name, address, lat, lon, mail, tel, web_site, services, fun, industry, education);
-            ref.child(company_id).setValue(Company);
-
+//            ref = FirebaseDatabase.getInstance().getReference("Companies");
+//            company_id = ref.push().getKey();
+            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("Companies");
+            company_id = dbRef.push().getKey();
+            Company = new Companies.CompanyData(company_id, name, address, lat, lon, mail, tel, web_site, services, fun, industry, education);
+            dbRef.child(company_id).setValue(Company);
+//            ref.child(company_id).setValue(Company);
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-            Toast.makeText(this, "inserted", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Data entered successfully.", Toast.LENGTH_LONG).show();
         }
      else
             Toast.makeText(this, "error", Toast.LENGTH_LONG).show();
