@@ -10,11 +10,13 @@ import android.widget.AdapterView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentList extends RecyclerView.Adapter<FragmentList.ViewHolder> {
+public class FragmentList extends RecyclerView.Adapter<FragmentList.ViewHolder> implements Filterable {
 
     private List<Companies> allCompanies;
     private List<Companies> previewCompanies;
@@ -57,6 +59,39 @@ public class FragmentList extends RecyclerView.Adapter<FragmentList.ViewHolder> 
     @Override
     public int getItemCount() {
         return previewCompanies.size();
+    }
+
+
+    @Override
+    public Filter getFilter() {
+        return doFilter;
+    }
+
+    private Filter doFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Companies> filterList = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0) {
+                filterList.addAll(allCompanies);
+            } else {
+                String enterForFilter = constraint.toString().toLowerCase().trim();
+                for (Companies company : allCompanies) {
+                    if (company.getName().toLowerCase().contains(enterForFilter)) {
+                        filterList.add(company);
+                    }
+                }
+            }
+            FilterResults resultList = new FilterResults();
+            resultList.values = filterList;
+            return resultList;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            previewCompanies.clear();
+            previewCompanies.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
