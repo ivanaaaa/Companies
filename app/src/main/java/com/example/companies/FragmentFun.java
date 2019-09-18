@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentFun extends Fragment implements FragmentList.OnItemClickListener{
+public class FragmentFun extends Fragment implements FragmentList.OnItemClickListener {
 
     public static final String Company_name = "Name";
     public static final String Company_address = "Address";
@@ -32,6 +33,8 @@ public class FragmentFun extends Fragment implements FragmentList.OnItemClickLis
     private List<Companies> funList;
     private FragmentList companiesList;
 
+    private SearchView searchView;
+
     public FragmentFun() {
     }
 
@@ -40,6 +43,21 @@ public class FragmentFun extends Fragment implements FragmentList.OnItemClickLis
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fun_fragment, container, false);
         myRecyclerView = v.findViewById(R.id.fun_recyclerView);
+
+        searchView = v.findViewById(R.id.searchView);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                companiesList.getFilter().filter(s);
+                return false;
+            }
+        });
 
 //        RecyclerViewAdapter recyclerAdapter= new RecyclerViewAdapter(getContext(),lstFun);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -113,15 +131,15 @@ public class FragmentFun extends Fragment implements FragmentList.OnItemClickLis
     public void onItemClick(int position) {
         Intent intent;
 
-        intent = new Intent(getActivity(),InfoActivity.class);
+        intent = new Intent(getActivity(), InfoActivity.class);
 
         Companies clickedItem = funList.get(position);
 
-        intent.putExtra(Company_name,clickedItem.getName());
-        intent.putExtra(Company_address,clickedItem.getAddress());
-        intent.putExtra(Company_email,clickedItem.getEmail());
-        intent.putExtra(Company_phone,clickedItem.getTelephone());
-        intent.putExtra(Company_web,clickedItem.getWeb_site());
+        intent.putExtra(Company_name, clickedItem.getName());
+        intent.putExtra(Company_address, clickedItem.getAddress());
+        intent.putExtra(Company_email, clickedItem.getEmail());
+        intent.putExtra(Company_phone, clickedItem.getTelephone());
+        intent.putExtra(Company_web, clickedItem.getWeb_site());
 
         startActivity(intent);
     }

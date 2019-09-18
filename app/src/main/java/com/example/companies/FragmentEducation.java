@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,8 @@ public class FragmentEducation extends Fragment implements FragmentList.OnItemCl
     private List<Companies> educationList;
     private FragmentList companiesList;
 
+    private SearchView searchView;
+
     public FragmentEducation() {
     }
 
@@ -40,6 +43,21 @@ public class FragmentEducation extends Fragment implements FragmentList.OnItemCl
         v = inflater.inflate(R.layout.education_fragment, container, false);
         myRecyclerView = v.findViewById(R.id.education_recyclerView);
 
+
+        searchView = v.findViewById(R.id.searchView);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                companiesList.getFilter().filter(s);
+                return false;
+            }
+        });
 //        RecyclerViewAdapter recyclerAdapter= new RecyclerViewAdapter(getContext(),lstEducation);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 //        myRecyclerView.setAdapter(new RecyclerView.Adapter() {
