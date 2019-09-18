@@ -87,7 +87,7 @@ public class FragmentIndustry extends Fragment implements FragmentList.OnItemCli
 
                 companiesList = new FragmentList(getContext(), industryList);
                 myRecyclerView.setAdapter(companiesList);
-                companiesList.setOnItemClickListener(FragmentIndustry.this);
+                companiesList.OnItemClickListener(FragmentIndustry.this);
 
             }
 

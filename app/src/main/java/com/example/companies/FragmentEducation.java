@@ -83,7 +83,7 @@ public class FragmentEducation extends Fragment implements FragmentList.OnItemCl
 
                 companiesList = new FragmentList(getContext(), educationList);
                 myRecyclerView.setAdapter(companiesList);
-                companiesList.setOnItemClickListener(FragmentEducation.this);
+                companiesList.OnItemClickListener(FragmentEducation.this);
             }
 
             @Override

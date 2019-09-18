@@ -84,7 +84,7 @@ public class FragmentFun extends Fragment implements FragmentList.OnItemClickLis
 
                 companiesList = new FragmentList(getContext(), funList);
                 myRecyclerView.setAdapter(companiesList);
-                companiesList.setOnItemClickListener(FragmentFun.this);
+                companiesList.OnItemClickListener(FragmentFun.this);
 
             }
 
