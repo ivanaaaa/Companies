@@ -92,7 +92,7 @@ public class FragmentList extends RecyclerView.Adapter<FragmentList.ViewHolder> 
             previewCompanies.addAll((List) results.values);
             notifyDataSetChanged();
         }
-    }
+    };
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
