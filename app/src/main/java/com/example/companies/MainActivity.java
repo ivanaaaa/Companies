@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    public static float distFrom(float lat1, float lng1, float lat2, float lng2) {
+    public static float distance(float lat1, float lng1, float lat2, float lng2) {
         double earthRadius = 6371000; //meters
         double dLat = Math.toRadians(lat2-lat1);
         double dLng = Math.toRadians(lng2-lng1);
@@ -52,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
                 Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
                         Math.sin(dLng/2) * Math.sin(dLng/2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        float dist = (float) (earthRadius * c);
+        float distance = (float) (earthRadius * c);
 
-        return dist;
+        return distance;
     }
 
     @Override
