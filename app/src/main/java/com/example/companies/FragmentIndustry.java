@@ -27,7 +27,6 @@ public class FragmentIndustry extends Fragment implements FragmentList.OnItemCli
     public static final String Company_email = "Email";
     public static final String Company_phone = "Phone";
     public static final String Company_web = "Web site";
-
     View v;
     private RecyclerView myRecyclerView;
     private List<Companies.CompanyData> industryList;
@@ -38,15 +37,12 @@ public class FragmentIndustry extends Fragment implements FragmentList.OnItemCli
     public FragmentIndustry() {
     }
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.industry_fragment, container, false);
         myRecyclerView = (RecyclerView) v.findViewById(R.id.industry_recyclerView);
-
         searchView = v.findViewById(R.id.searchView);
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -59,32 +55,11 @@ public class FragmentIndustry extends Fragment implements FragmentList.OnItemCli
                 return false;
             }
         });
-
-//        RecyclerViewAdapter recyclerAdapter= new RecyclerViewAdapter(getContext(),lstIndustry);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        myRecyclerView.setAdapter(new RecyclerView.Adapter() {
-//            @Override
-//            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//                return null;
-//            }
-//
-//            @Override
-//            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-//
-//            }
-//
-//            @Override
-//            public int getItemCount() {
-//                return 0;
-//            }
-//        });
-//        myrecyclerview.setAdapter(recyclerAdapter);
-
         industryList = new ArrayList<Companies.CompanyData>();
         takeCompaniesList();
         return v;
     }
-
 
     private void takeCompaniesList() {
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Companies");
@@ -92,7 +67,6 @@ public class FragmentIndustry extends Fragment implements FragmentList.OnItemCli
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 industryList.clear();
-
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Companies.CompanyData company;
                     company = snapshot.getValue(Companies.CompanyData.class);
@@ -102,11 +76,9 @@ public class FragmentIndustry extends Fragment implements FragmentList.OnItemCli
                     }
 
                 }
-
                 companiesList = new FragmentList(getContext(), industryList);
                 myRecyclerView.setAdapter(companiesList);
                 companiesList.OnItemClickListener(FragmentIndustry.this);
-
             }
 
             @Override
@@ -133,17 +105,13 @@ public class FragmentIndustry extends Fragment implements FragmentList.OnItemCli
     @Override
     public void onItemClick(int position) {
         Intent intent;
-
         intent = new Intent(getActivity(), InfoActivity.class);
-
         Companies.CompanyData clickedItem = industryList.get(position);
-
         intent.putExtra(Company_name, clickedItem.getName());
         intent.putExtra(Company_address, clickedItem.getAddress());
         intent.putExtra(Company_email, clickedItem.getEmail());
         intent.putExtra(Company_phone, clickedItem.getTelephone());
         intent.putExtra(Company_web, clickedItem.getWeb_site());
-
         startActivity(intent);
     }
 }
