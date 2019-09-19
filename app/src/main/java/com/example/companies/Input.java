@@ -1,37 +1,21 @@
 package com.example.companies;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
 import android.support.v7.widget.Toolbar;
-
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Checkable;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
-import com.firebase.client.Firebase;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-
-import java.text.DecimalFormat;
-
-import static android.text.TextUtils.*;
 
 public class Input extends AppCompatActivity implements View.OnClickListener {
     public ImageView input;
@@ -42,7 +26,6 @@ public class Input extends AppCompatActivity implements View.OnClickListener {
     public EditText longitude;
     public EditText email, phone, web;
     private CheckBox services_check, fun_check, industry_check, education_check;
-    Button save;
 
     //    FirebaseDatabase database;
     DatabaseReference ref;
@@ -86,22 +69,17 @@ public class Input extends AppCompatActivity implements View.OnClickListener {
             address_company.setError("Enter address");
             address_company.requestFocus();
             return true;
-
         }
-
         if (Float.isNaN(lat)) {
             latitude.setError("Enter latitude");
             latitude.requestFocus();
             return true;
-
         }
-
         if (Float.isNaN(lon)) {
             longitude.setError("Enter longitude");
             longitude.requestFocus();
             return true;
         }
-
         if (mail.isEmpty()) {
             email.setError("Enter mail");
             email.requestFocus();
@@ -148,139 +126,8 @@ public class Input extends AppCompatActivity implements View.OnClickListener {
             Toast.makeText(this, "Data entered successfully.", Toast.LENGTH_LONG).show();
         } else
             Toast.makeText(this, "error", Toast.LENGTH_LONG).show();
-
     }
-
-//        input = (ImageView) findViewById(R.id.input);
-//        input.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                openIntent();
-//
-//            }
-//        });
-
-    //mRootRef = new Firebase("https://companies-fb229.firebaseio.com/Company");
-
-    //mdb= FirebaseDatabase.getInstance().getReference();
-//    ----------------------------
-
-//    database =FirebaseDatabase.getInstance();
-//    Company =new Companies();
-//
-//    ref =database.getReference("Companies").
-//
-//    child("Company");
-//    ----------------------------
-//        save.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                //Double lat = Double.parseDouble((latitude.getText().toString()));
-//                //Double lon = Double.parseDouble((longitude.getText().toString()));
-//                Company.setName(name_company.getText().toString());
-//                Company.setAddress(address_company.getText().toString());
-//                Company.setLatitude(latitude.getText().toString());
-//                Company.setLongitude(longitude.getText().toString());
-//                Company.setEmail(email.getText().toString());
-//                Company.setTelephone(phone.getText().toString());
-//                Company.setWeb_site(web.getText().toString());
-//                ref.push().setValue(Company);
-//                Toast.makeText(Input.this,"Successfully inserted",Toast.LENGTH_LONG).show();
-//
-//            }
-//        });
-
-    // Company = new Companies();
-//        save.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                addCompany();
-//            }
-//        });
-
-//    private void getValues() {
-//        Company.setName(name_company.getText().toString());
-//        Company.setAddress(address_company.getText().toString());
-//        Company.setLatitude(latitude.getText().toString());
-//        Company.setLongitude(longitude.getText().toString());
-//        Company.setEmail(email.getText().toString());
-//        StringBuilder result = new StringBuilder();
-//        if (services_check.isChecked()) {
-//            result.append("services");
-//        }
-//        if (fun_check.isChecked()) {
-//            result.append("fun");
-//        }
-//        if (industry_check.isChecked()) {
-//            result.append("industry");
-//        }
-//        if (education_check.isChecked()) {
-//            result.append("education");
-//        }
-//        Company.setCategory(result.toString());
-//        Company.setTelephone(phone.getText().toString());
-//        Company.setWeb_site(web.getText().toString());
-//
-//    }
-
-//    public void openIntent() {
-//
-//    }
-//    save.setOnClickListener(new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//
-//            btnInsert();
-//
-//        }
-//    });
-//
-//    public void btnInsert(View view) {
-//
-//        ref.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                getValues();
-//                ref.setValue(Company);
-//                Toast.makeText(Input.this, "Successfully inserted", Toast.LENGTH_LONG).show();
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
-//    public void addCompany (){
-//        String name = name_company.getText().toString();
-//        String address = address_company.getText().toString();
-//        String lat = latitude.getText().toString();
-//        String lon = longitude.getText().toString();
-//        String mail = email.getText().toString();
-//        String tel = phone.getText().toString();
-//        String Web = web.getText().toString();
-//        if(!isEmpty(name) && !isEmpty(address) && !isEmpty(lat) && !isEmpty(lon) && !isEmpty(mail) && !isEmpty(tel) && !isEmpty(Web)){
-//            String id = ref.push().getKey();
-//            Companies Company = new Companies(id,name,address,lat,lon,mail,tel,Web);
-//            ref.child(id).setValue(Company);
-//
-//            name_company.setText("");
-//            address_company.setText("");
-//            latitude.setText("");
-//            longitude.setText("");
-//            email.setText("");
-//            phone.setText("");
-//            web.setText("");
-//        }
-//        else{
-//            Toast.makeText(Input.this,"Please fill the empty field",Toast.LENGTH_LONG).show();
-//        }
-//    }}
-
+    
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater;
 
