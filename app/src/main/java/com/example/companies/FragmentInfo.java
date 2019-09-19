@@ -27,47 +27,24 @@ public class FragmentInfo extends Fragment implements FragmentList.OnItemClickLi
     public static final String Company_email = "Email";
     public static final String Company_phone = "Phone";
     public static final String Company_web = "Web site";
-
     private RecyclerView recyclerView;
     private FragmentList companyAdapter;
     private List<Companies.CompanyData> companies;
 
-//    private SearchView searchView;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.info_fragment, container, false);
-
         recyclerView = view.findViewById(R.id.info_fragment);
         recyclerView.setHasFixedSize(true);
-
-//        searchView = view.findViewById(R.id.searchView);
-
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String s) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String s) {
-//                companyAdapter.getFilter().filter(s);
-//                return false;
-//            }
-//        });
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         companies = new ArrayList<Companies.CompanyData>();
         getCompanies();
-
         return view;
     }
 
     private void getCompanies() {
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Companies");
-
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -80,7 +57,6 @@ public class FragmentInfo extends Fragment implements FragmentList.OnItemClickLi
                         companies.add(company);
                     }
                 }
-
                 companyAdapter = new FragmentList(getContext(), companies);
                 recyclerView.setAdapter(companyAdapter);
                 companyAdapter.OnItemClickListener(FragmentInfo.this);
@@ -88,25 +64,20 @@ public class FragmentInfo extends Fragment implements FragmentList.OnItemClickLi
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
     }
-
 
     @Override
     public void onItemClick(int position) {
 
         Intent intent = new Intent(getActivity(), InfoActivity.class);
-
         Companies.CompanyData clickedItem = companies.get(position);
-
         intent.putExtra(Company_name, clickedItem.getName());
         intent.putExtra(Company_address, clickedItem.getAddress());
         intent.putExtra(Company_email, clickedItem.getEmail());
         intent.putExtra(Company_phone, clickedItem.getTelephone());
         intent.putExtra(Company_web, clickedItem.getWeb_site());
-
         startActivity(intent);
     }
 }
