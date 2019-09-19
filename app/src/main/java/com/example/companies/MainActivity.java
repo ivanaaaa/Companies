@@ -21,6 +21,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.content.Context;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,18 +51,68 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
     public static float distance(float lat1, float lng1, float lat2, float lng2) {
         double earthRadius = 6371000; //meters
-        double dLat = Math.toRadians(lat2-lat1);
-        double dLng = Math.toRadians(lng2-lng1);
-        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLng = Math.toRadians(lng2 - lng1);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
                 Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
-                        Math.sin(dLng/2) * Math.sin(dLng/2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+                        Math.sin(dLng / 2) * Math.sin(dLng / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         float distance = (float) (earthRadius * c);
 
         return distance;
     }
+//    public class MyLocation implements LocationListener {
+//        double lat2,lng2,lat1,lng1;
+//        @Override
+//        public void onLocationChanged(Location loc)
+//        {
+//            lat2=loc.getLatitude();
+//            lng2=loc.getLongitude();
+//            String Text = "My current location is: " +"Latitud = "+ loc.getLatitude() +"Longitud = " + loc.getLongitude();
+//
+//            //System.out.println("Lat & Lang form Loc"+Text);
+//            //Toast.makeText( getApplicationContext(), Text,Toast.LENGTH_SHORT).show();
+//        }
+//
+//        @Override
+//        public void onProviderDisabled(String provider)
+//        {
+//        }
+//
+//        @Override
+//        public void onProviderEnabled(String provider)
+//        {
+//        }
+//
+//        @Override
+//        public void onStatusChanged(String provider, int status, Bundle extras)
+//        {
+//        }
+//
+//
+//        //Calculating distance
+//        double earthRadius = 3958.75;
+//
+//        double dLat = Math.toRadians(lat1-lat2);
+//        double dLng = Math.toRadians(lng1-lng2);
+//        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+//                Math.cos(Math.toRadians(lat2)) * Math.cos(Math.toRadians(lat1)) *
+//                        Math.sin(dLng/2) * Math.sin(dLng/2);
+//        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+//        double dist = earthRadius * c;
+//    }
+//    Location startPoint=new Location("locationA");
+//startPoint.setLatitude(17.372102);
+//startPoint.setLongitude(78.484196);
+//
+//    Location endPoint=new Location("locationA");
+//endPoint.setLatitude(17.375775);
+//endPoint.setLongitude(78.469218);
+//
+//    double distance=startPoint.distanceTo(endPoint);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +123,32 @@ public class MainActivity extends AppCompatActivity {
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                final  float currentLat = (float) location.getLatitude();
+                final float currentLat = (float) location.getLatitude();
                 final float currentLon = (float) location.getLongitude();
+                String Text = "My current location is: " + "Latitude = " + currentLat + "Longitude = " + currentLon;
+//                Toast.makeText(getApplicationContext(), Text, Toast.LENGTH_SHORT).show();
+
+                final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Companies");
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Companies.CompanyData company;
+                            company = snapshot.getValue(Companies.CompanyData.class);
+                            float myDistance = distance(company.getLatitude(), company.getLongitude(), currentLat, currentLon);
+                            if (myDistance <= 50) {
+                                Toast.makeText(getApplicationContext(), "You are within 50 meters of " + company.getName(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
 
             @Override

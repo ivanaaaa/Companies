@@ -76,7 +76,7 @@ public class Input extends AppCompatActivity implements View.OnClickListener {
         findViewById(R.id.btnInsert).setOnClickListener(this);
     }
 
-    public boolean validator (String name, String address, String lat, String lon, String mail, String tel,String web_site){
+    public boolean validator(String name, String address, float lat, float lon, String mail, String tel, String web_site) {
         if (name.isEmpty()) {
             name_company.setError("Enter Name");
             name_company.requestFocus();
@@ -89,14 +89,14 @@ public class Input extends AppCompatActivity implements View.OnClickListener {
 
         }
 
-        if (lat.isEmpty()) {
+        if (Float.isNaN(lat)) {
             latitude.setError("Enter latitude");
             latitude.requestFocus();
             return true;
 
         }
 
-        if (lon.isEmpty()) {
+        if (Float.isNaN(lon)) {
             longitude.setError("Enter longitude");
             longitude.requestFocus();
             return true;
@@ -119,12 +119,13 @@ public class Input extends AppCompatActivity implements View.OnClickListener {
         }
         return false;
     }
+
     public void onClick(View v) {
 
         String name = (String) name_company.getText().toString().trim();
         String address = (String) address_company.getText().toString().trim();
-        String lat = (String) latitude.getText().toString().trim();
-        String lon = (String) longitude.getText().toString().trim();
+        float lat = Float.parseFloat(latitude.getText().toString().trim());
+        float lon = Float.parseFloat(longitude.getText().toString().trim());
         String mail = (String) email.getText().toString().trim();
         String tel = (String) phone.getText().toString().trim();
         String web_site = (String) web.getText().toString().trim();
@@ -132,8 +133,7 @@ public class Input extends AppCompatActivity implements View.OnClickListener {
         boolean fun = (boolean) fun_check.isChecked();
         boolean industry = (boolean) industry_check.isChecked();
         boolean education = (boolean) education_check.isChecked();
-        if (!validator(name, address, lat, lon, mail, tel, web_site))
-        {
+        if (!validator(name, address, lat, lon, mail, tel, web_site)) {
             Companies.CompanyData Company;
             String company_id;
 //            ref = FirebaseDatabase.getInstance().getReference("Companies");
@@ -146,8 +146,7 @@ public class Input extends AppCompatActivity implements View.OnClickListener {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             Toast.makeText(this, "Data entered successfully.", Toast.LENGTH_LONG).show();
-        }
-     else
+        } else
             Toast.makeText(this, "error", Toast.LENGTH_LONG).show();
 
     }

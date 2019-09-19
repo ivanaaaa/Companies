@@ -11,8 +11,8 @@ public class Companies extends Application {
         private String Company_id;
         private String Name;
         private String Address;
-        private String Latitude;
-        private String Longitude;
+        private float Latitude;
+        private float Longitude;
         private String Email;
         private String Telephone;
         private String Web_site;
@@ -24,7 +24,7 @@ public class Companies extends Application {
         public CompanyData() {
         }
 
-        public CompanyData(String company_id, String name, String address, String latitude, String longitude, String email, String telephone, String web_site, boolean check_services, boolean check_fun, boolean check_industry, boolean check_education) {
+        public CompanyData(String company_id, String name, String address, float latitude, float longitude, String email, String telephone, String web_site, boolean check_services, boolean check_fun, boolean check_industry, boolean check_education) {
             this.Company_id = company_id;
             this.Name = name;
             this.Address = address;
@@ -63,19 +63,19 @@ public class Companies extends Application {
             this.Address = address;
         }
 
-        public String getLatitude() {
+        public float getLatitude() {
             return Latitude;
         }
 
-        public void setLatitude(String latitude) {
+        public void setLatitude(float latitude) {
             this.Latitude = latitude;
         }
 
-        public String getLongitude() {
+        public float getLongitude() {
             return Longitude;
         }
 
-        public void setLongitude(String longitude) {
+        public void setLongitude(float longitude) {
             this.Longitude = longitude;
         }
 
