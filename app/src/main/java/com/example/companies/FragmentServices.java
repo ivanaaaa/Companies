@@ -23,7 +23,6 @@ import java.util.List;
 
 public class FragmentServices extends Fragment implements FragmentList.OnItemClickListener {
 
-
     public static final String Company_name = "Name";
     public static final String Company_address = "Address";
     public static final String Company_email = "Email";
@@ -33,7 +32,6 @@ public class FragmentServices extends Fragment implements FragmentList.OnItemCli
     private RecyclerView myRecyclerView;
     private List<Companies.CompanyData> servicesList;
     private FragmentList companiesList;
-
     private SearchView searchView;
 
     public FragmentServices() {
@@ -60,25 +58,7 @@ public class FragmentServices extends Fragment implements FragmentList.OnItemCli
                 return false;
             }
         });
-//        RecyclerViewAdapter recyclerAdapter= new RecyclerViewAdapter(getContext(),lstServices);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        myRecyclerView.setAdapter(new RecyclerView.Adapter() {
-//            @Override
-//            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//                return null;
-//            }
-//
-//            @Override
-//            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-//
-//            }
-//
-//            @Override
-//            public int getItemCount() {
-//                return 0;
-//            }
-//        });
-//        myrecyclerview.setAdapter(recyclerAdapter);
         servicesList = new ArrayList<Companies.CompanyData>();
         takeCompaniesList();
         return v;
@@ -98,18 +78,14 @@ public class FragmentServices extends Fragment implements FragmentList.OnItemCli
                     if (company != null && company.isCheck_services()) {
                         servicesList.add(company);
                     }
-
                 }
-
                 companiesList = new FragmentList(getContext(), servicesList);
                 myRecyclerView.setAdapter(companiesList);
                 companiesList.OnItemClickListener(FragmentServices.this);
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
     }
@@ -132,18 +108,13 @@ public class FragmentServices extends Fragment implements FragmentList.OnItemCli
     @Override
     public void onItemClick(int position) {
         Intent intent;
-
         intent = new Intent(getActivity(), InfoActivity.class);
-
         Companies.CompanyData clickedItem = servicesList.get(position);
-
         intent.putExtra(Company_name, clickedItem.getName());
         intent.putExtra(Company_address, clickedItem.getAddress());
         intent.putExtra(Company_email, clickedItem.getEmail());
         intent.putExtra(Company_phone, clickedItem.getTelephone());
         intent.putExtra(Company_web, clickedItem.getWeb_site());
-
         startActivity(intent);
     }
-
 }
