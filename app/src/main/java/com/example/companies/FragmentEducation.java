@@ -28,12 +28,10 @@ public class FragmentEducation extends Fragment implements FragmentList.OnItemCl
     public static final String Company_email = "Email";
     public static final String Company_phone = "Phone";
     public static final String Company_web = "Web site";
-
     View v;
     private RecyclerView myRecyclerView;
     private List<Companies.CompanyData> educationList;
     private FragmentList companiesList;
-
     private SearchView searchView;
 
     public FragmentEducation() {
@@ -42,10 +40,7 @@ public class FragmentEducation extends Fragment implements FragmentList.OnItemCl
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.education_fragment, container, false);
         myRecyclerView = v.findViewById(R.id.education_recyclerView);
-
-
         searchView = v.findViewById(R.id.searchView);
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -58,25 +53,7 @@ public class FragmentEducation extends Fragment implements FragmentList.OnItemCl
                 return false;
             }
         });
-//        RecyclerViewAdapter recyclerAdapter= new RecyclerViewAdapter(getContext(),lstEducation);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        myRecyclerView.setAdapter(new RecyclerView.Adapter() {
-//            @Override
-//            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//                return null;
-//            }
-//
-//            @Override
-//            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-//
-//            }
-//
-//            @Override
-//            public int getItemCount() {
-//                return 0;
-//            }
-//        });
-//        myRecyclerView.setAdapter(recyclerAdapter);
         educationList = new ArrayList<Companies.CompanyData>();
         takeCompaniesList();
         return v;
@@ -96,9 +73,7 @@ public class FragmentEducation extends Fragment implements FragmentList.OnItemCl
                     if (company.isCheck_education()) {
                         educationList.add(company);
                     }
-
                 }
-
                 companiesList = new FragmentList(getContext(), educationList);
                 myRecyclerView.setAdapter(companiesList);
                 companiesList.OnItemClickListener(FragmentEducation.this);
@@ -111,6 +86,7 @@ public class FragmentEducation extends Fragment implements FragmentList.OnItemCl
         });
     }
 
+    //hard coded
 //    @Override
 //    public void onCreate(@Nullable Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
@@ -124,22 +100,16 @@ public class FragmentEducation extends Fragment implements FragmentList.OnItemCl
 //        lstEducation.add(new Services("Jane Sandanski","Stip","078965426","https//janesandanski.com",R.drawable.img1));
 //        lstEducation.add(new Services("OU Nikola Karev","Kocani","078965957","https//ounk.com",R.drawable.img1));
 //    }
-
     @Override
     public void onItemClick(int position) {
         Intent intent;
-
         intent = new Intent(getActivity(), InfoActivity.class);
-
         Companies.CompanyData clickedItem = educationList.get(position);
-
         intent.putExtra(Company_name, clickedItem.getName());
         intent.putExtra(Company_address, clickedItem.getAddress());
         intent.putExtra(Company_email, clickedItem.getEmail());
         intent.putExtra(Company_phone, clickedItem.getTelephone());
         intent.putExtra(Company_web, clickedItem.getWeb_site());
-
         startActivity(intent);
     }
-
 }
