@@ -127,7 +127,7 @@ public class Input extends AppCompatActivity implements View.OnClickListener {
         } else
             Toast.makeText(this, "error", Toast.LENGTH_LONG).show();
     }
-    
+
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater;
 

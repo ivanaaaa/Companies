@@ -8,7 +8,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -18,7 +17,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.content.Context;
 import android.widget.Toast;
@@ -34,10 +32,7 @@ public class MainActivity extends AppCompatActivity {
     public Toolbar appBarLayout;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-
     private ImageView input;
-
-
     LocationManager locationManager;
     LocationListener locationListener;
 
@@ -61,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
                         Math.sin(dLng / 2) * Math.sin(dLng / 2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         float distance = (float) (earthRadius * c);
-
         return distance;
     }
 //    public class MyLocation implements LocationListener {
@@ -141,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "You are within 50 meters of " + company.getName(), Toast.LENGTH_SHORT).show();
                             }
                         }
-
                     }
 
                     @Override
@@ -174,7 +167,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //za application bar
-        // appBarLayout = (AppBarLayout) findViewById(R.id.appbarid);
         appBarLayout = (Toolbar) findViewById(R.id.appbarid);
         setSupportActionBar(appBarLayout);
         //tab
@@ -197,14 +189,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(2).setIcon(R.drawable.ic_industy);
         tabLayout.getTabAt(3).setIcon(R.drawable.ic_education);
 
-
     }
-
-//    public void openIntent() {
-//        Intent intent = new Intent(this, Input.class);
-//        startActivity(intent);
-//    }
-
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater;
