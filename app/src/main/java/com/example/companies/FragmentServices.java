@@ -115,6 +115,7 @@ public class FragmentServices extends Fragment implements FragmentList.OnItemCli
     }
 
 //example of list
+    //hardcoded without database connection
 //    @Override
 //    public void onCreate(@Nullable Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
@@ -126,7 +127,6 @@ public class FragmentServices extends Fragment implements FragmentList.OnItemCli
 //        lstServices.add(new Services("Mebel","ulica5","077965426","https//Mebel.com",R.drawable.img1));
 //        lstServices.add(new Services("Osvetluvanje","ulica6","075123987","https//Osvetluvanje.com",R.drawable.img1));
 //        lstServices.add(new Services("BuyCar","ulica7","078965426","https//Buycar.com",R.drawable.img1));
-//        lstServices.add(new Services("Findsmth","ulica8","078965957","https//Findsmth.com",R.drawable.img1));
 //    }
 
     @Override

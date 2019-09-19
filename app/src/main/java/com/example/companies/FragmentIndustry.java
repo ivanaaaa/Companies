@@ -115,7 +115,7 @@ public class FragmentIndustry extends Fragment implements FragmentList.OnItemCli
             }
         });
     }
-
+//without databese connection
 //    @Override
 //    public void onCreate(@Nullable Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
