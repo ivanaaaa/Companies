@@ -2,10 +2,6 @@ package com.example.companies;
 
 import android.app.Application;
 
-//import com.firebase.client.Firebase;
-
-//import java.io.Serializable;
-
 public class Companies extends Application {
     public static class CompanyData {
         private String Company_id;
