@@ -32,7 +32,6 @@ public class FragmentFun extends Fragment implements FragmentList.OnItemClickLis
     private RecyclerView myRecyclerView;
     private List<Companies.CompanyData> funList;
     private FragmentList companiesList;
-
     private SearchView searchView;
 
     public FragmentFun() {
@@ -58,26 +57,7 @@ public class FragmentFun extends Fragment implements FragmentList.OnItemClickLis
                 return false;
             }
         });
-
-//        RecyclerViewAdapter recyclerAdapter= new RecyclerViewAdapter(getContext(),lstFun);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        myrecyclerview.setAdapter(recyclerAdapter);
-//        myRecyclerView.setAdapter(new RecyclerView.Adapter() {
-//            @Override
-//            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//                return null;
-//            }
-//
-//            @Override
-//            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-//
-//            }
-//
-//            @Override
-//            public int getItemCount() {
-//                return 0;
-//            }
-//        });
         funList = new ArrayList<Companies.CompanyData>();
         takeCompaniesList();
         return v;
@@ -97,22 +77,19 @@ public class FragmentFun extends Fragment implements FragmentList.OnItemClickLis
                     if (company.isCheck_fun()) {
                         funList.add(company);
                     }
-
                 }
-
                 companiesList = new FragmentList(getContext(), funList);
                 myRecyclerView.setAdapter(companiesList);
                 companiesList.OnItemClickListener(FragmentFun.this);
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
     }
 
+    //entries without database
 //    @Override
 //    public void onCreate(@Nullable Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
@@ -126,21 +103,16 @@ public class FragmentFun extends Fragment implements FragmentList.OnItemClickLis
 //        lstFun.add(new Services("BuyCar","ulica7","078965426","https//Buycar.com",R.drawable.img1));
 //        lstFun.add(new Services("Findsmth","ulica8","078965957","https//Findsmth.com",R.drawable.img1));
 //    }
-
     @Override
     public void onItemClick(int position) {
         Intent intent;
-
         intent = new Intent(getActivity(), InfoActivity.class);
-
         Companies.CompanyData clickedItem = funList.get(position);
-
         intent.putExtra(Company_name, clickedItem.getName());
         intent.putExtra(Company_address, clickedItem.getAddress());
         intent.putExtra(Company_email, clickedItem.getEmail());
         intent.putExtra(Company_phone, clickedItem.getTelephone());
         intent.putExtra(Company_web, clickedItem.getWeb_site());
-
         startActivity(intent);
     }
 }
