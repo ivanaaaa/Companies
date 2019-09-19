@@ -34,7 +34,6 @@ public class FragmentList extends RecyclerView.Adapter<FragmentList.ViewHolder> 
         this.context = context;
         this.previewCompanies = previewCompanies;
         allCompanies = new ArrayList<>(previewCompanies);
-
     }
 
     @Override
@@ -46,7 +45,6 @@ public class FragmentList extends RecyclerView.Adapter<FragmentList.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Companies.CompanyData company;
-
         company = previewCompanies.get(i);
         viewHolder.companyName.setText(company.getName());
         viewHolder.companyAddress.setText(company.getAddress());
@@ -58,7 +56,6 @@ public class FragmentList extends RecyclerView.Adapter<FragmentList.ViewHolder> 
     public int getItemCount() {
         return previewCompanies.size();
     }
-
 
     @Override
     public Filter getFilter() {
@@ -101,12 +98,10 @@ public class FragmentList extends RecyclerView.Adapter<FragmentList.ViewHolder> 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             companyName = itemView.findViewById(R.id.companyName);
             companyAddress = itemView.findViewById(R.id.companyAddress);
             companyTelephone = itemView.findViewById(R.id.companyTelephone);
             companyWeb = itemView.findViewById(R.id.companyWeb);
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -119,9 +114,6 @@ public class FragmentList extends RecyclerView.Adapter<FragmentList.ViewHolder> 
                     }
                 }
             });
-
         }
-
     }
-
 }
